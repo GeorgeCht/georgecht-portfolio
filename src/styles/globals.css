@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-feature-settings: 'ss05', 'ss06', 'ss07';
+  color: #000;
+  background: #fff;
+}
+
+@layer base {
+  /* 
+   * Prevent default scrollbar 
+   */
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  main::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 
+   * Selection colors 
+   */
+  ::selection {
+    background-color: #000;
+    color: #fff;
+  }
+  /* 
+   * Typography
+   */
+  [class*='typography-display'],
+  [class*='typography-caps-'] {
+    @apply uppercase;
+  }
+  .typography-display {
+    @apply text-[240px] sm:text-[26.333vw];
+    @apply font-variation-thin;
+    @apply tracking-[-0.04em];
+    @apply leading-none;
+    @apply uppercase;
+  }
+  .typography-caps-lg {
+    @apply desktop:text-5xl lg:text-[3.625vw] text-[38px];
+    @apply font-variation-light;
+    @apply tracking-[-0.01em];
+    @apply leading-[0.9em];
+  }
+  .typography-caps-md {
+    @apply desktop:text-4xl lg:text-[2.925vw] text-4xl;
+    @apply font-variation-light;
+    @apply tracking-[-0.01em];
+    @apply leading-[0.9em];
+  }
+  .typography-caps-sm {
+    @apply text-[11px];
+    @apply font-variation-medium;
+    @apply tracking-[-0.01em];
+    @apply leading-[0.9em];
+  }
+  .typography-lg {
+    @apply text-[32px];
+    @apply font-variation-medium;
+    @apply tracking-[-0.01em];
+    @apply leading-[1.1em];
+    font-feature-settings: 'ss01' on;
+  }
+  .typography-md {
+    @apply text-xl;
+    @apply font-variation-medium;
+    @apply tracking-[0.02em];
+    @apply leading-[1.1em];
+  }
+  .typography-sm {
+    @apply text-sm;
+    @apply font-variation-medium;
+    @apply tracking-[-0.01em];
+    @apply leading-[1.1em];
+  }
+  .typography-base {
+    @apply text-[13px];
+    @apply font-variation-semi;
+    @apply tracking-[0.03em];
+    @apply leading-[1.4em];
+  }
+}
