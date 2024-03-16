@@ -14,7 +14,6 @@ import Pill from '@/components/new/button-pill'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import Marquee from '@/components/ui/marquee'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
-import Link from 'next/link'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -54,10 +53,15 @@ export default function About() {
           <Section
             withPadding
             withGap
-            className={'pt-0 sm:pt-0 sm:flex-row gap-2.5 w-full'}
+            className={'pt-0 sm:pt-0 lg:flex-row gap-1 sm:gap-2.5 w-full'}
           >
-            <div className={'w-1/6'}>
-              <Reveal opacity childrenRef={headerRef} duration={1}>
+            <div className={'w-1/6 flex lg:flex sm:hidden'}>
+              <Reveal
+                opacity
+                childrenRef={headerRef}
+                duration={1}
+                outterClass={'sm:h-full !h-[42px]'}
+              >
                 <p
                   className={
                     'typography-lg w-full md:max-w-[49vw] scale-x-[-1]'
@@ -68,7 +72,7 @@ export default function About() {
                 </p>
               </Reveal>
             </div>
-            <div className={'w-1/3'}>
+            <div className={'w-full lg:w-1/3'}>
               <Reveal opacity childrenRef={headerRef} duration={1}>
                 <h1
                   className={'typography-lg w-full md:max-w-[49vw]'}
@@ -97,10 +101,14 @@ export default function About() {
                   feature a perfect blend of classic and contemporary styles.
                 </p>
               </Reveal>
-              <div className={'mt-4 pb-4'}></div>
+              <div className={'mt-4 pb-0 sm:pb-4'}></div>
             </div>
-            <div className={'w-1/3'} />
-            <div className={'w-1/6 pt-4'}>
+            <div className={'w-full sm:w-1/2 lg:w-1/3 hidden lg:flex'} />
+            <div
+              className={
+                'w-full lg:w-1/6 pt-0 sm:pt-4 flex flex-col pb-2 lg:pb-0'
+              }
+            >
               <Reveal
                 y={false}
                 className={'h-[42px]'}
@@ -136,16 +144,7 @@ export default function About() {
               </Reveal>
             </div>
           </Section>
-          <Table.Project
-            project={{
-              year: 2024,
-              title: 'C2 Montreal',
-              client: 'Self-initiated',
-              role: 'Typeface Design',
-              image: '/12.png',
-              color: '#000000',
-            }}
-          />
+
           <Section withPadding withGap className={'sm:pt-1.5'}>
             <AspectRatioImage
               src={'/12.png'}

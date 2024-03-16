@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { cn, getYear } from '@/lib/utils'
 import Link from 'next/link'
 import React, {
   DetailedHTMLProps,
@@ -9,6 +9,8 @@ import React, {
 import TextReveal from '@/components/ui/text-reveal'
 import Magnetic from '../ui/magnetic'
 import TextRevealFlip from '../ui/text-reveal-flip'
+import data from '@/lib/staticData.json'
+import { toast } from 'sonner'
 
 const Footer = ({
   className,
@@ -29,20 +31,12 @@ const Footer = ({
   const animation = {
     step: 0.035,
   }
-  const socialItems = [
-    {
-      title: 'GitHub',
-      href: '/',
-    },
-    {
-      title: 'Dribbble',
-      href: '/',
-    },
-    {
-      title: 'LinkedIn',
-      href: '/',
-    },
-  ]
+
+  const openInNewTab = (url?: string | URL | undefined) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
   return (
     <footer
       className={cn(
@@ -62,7 +56,17 @@ const Footer = ({
           text={'Contact'}
         />
         <div className={'w-fit'}>
-          <Link className={'w-fit'} href={'/'}>
+          <button
+            className={'w-fit'}
+            onClick={() => {
+              try {
+                navigator.clipboard.writeText(data.email)
+                toast.success('Email copied to clipboard.')
+              } catch (error) {
+                openInNewTab(`mailto:${data.email}`)
+              }
+            }}
+          >
             <Magnetic className={'-mb-1.5 mt-1.5'}>
               <TextRevealFlip
                 as={'span'}
@@ -74,10 +78,10 @@ const Footer = ({
                   'after:mt-[0.25em] md:group-hover:translate-y-[-120%] typography-caps-md sm:typography-caps-sm sm:text-[11px] text-[8vw]'
                 }
                 delay={animation.step}
-                text={'info@georgecht.com'}
+                text={data.email}
               />
             </Magnetic>
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -97,26 +101,30 @@ const Footer = ({
             text={'Follow'}
           />
           <div className={'flex flex-col sm:flex-row gap-0 sm:gap-1'}>
-            {socialItems.map((item, index) => (
-              <React.Fragment key={index}>
-                <Magnetic className={'-mb-1.5 mt-1.5'}>
-                  <Link key={index} href={item.href}>
-                    <TextRevealFlip
-                      as={'span'}
-                      lineHeight={lineHeight}
-                      enterY={'10%'}
-                      delay={animation.step + index / 10}
-                      wrapperClass={'-mt-3'}
-                      typeClass={'mr-0.5 pt-[0.185em] sm:pt-0'}
-                      className={
-                        'after:mt-[0.25em] md:group-hover:translate-y-[-120%] typography-caps-md sm:typography-caps-sm sm:text-[11px] text-[8vw]'
-                      }
-                      text={item.title}
-                    />
-                  </Link>
-                </Magnetic>
-              </React.Fragment>
-            ))}
+            {data.social.map((item, index) =>
+              item.title === 'Instagram' ? (
+                <React.Fragment key={index} />
+              ) : (
+                <React.Fragment key={index}>
+                  <Magnetic className={'-mb-1.5 mt-1.5'}>
+                    <Link href={item.url}>
+                      <TextRevealFlip
+                        as={'span'}
+                        lineHeight={lineHeight}
+                        enterY={'10%'}
+                        delay={animation.step + index / 10}
+                        wrapperClass={'-mt-3'}
+                        typeClass={'mr-0.5 pt-[0.185em] sm:pt-0'}
+                        className={
+                          'after:mt-[0.25em] md:group-hover:translate-y-[-120%] typography-caps-md sm:typography-caps-sm sm:text-[11px] text-[8vw]'
+                        }
+                        text={item.title}
+                      />
+                    </Link>
+                  </Magnetic>
+                </React.Fragment>
+              ),
+            )}
           </div>
         </div>
 
@@ -132,7 +140,7 @@ const Footer = ({
             delay={animation.step * 6}
             className={'-mb-3.5'}
             typeClass={'typography-caps-sm mr-0.5'}
-            text={'GeorgeCht © 2024'}
+            text={`GeorgeCht © ${getYear()}`}
           />
           <TextReveal
             as={'span'}
@@ -154,7 +162,7 @@ const Footer = ({
           delay={animation.step * 6}
           className={'mb-1.5 sm:-mb-3.5'}
           typeClass={'typography-caps-sm mr-0.5'}
-          text={'GeorgeCht © 2024'}
+          text={`GeorgeCht © ${getYear()}`}
         />
         <TextReveal
           as={'span'}

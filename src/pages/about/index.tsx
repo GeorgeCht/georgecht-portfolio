@@ -1,5 +1,7 @@
 'use client'
 
+import React, { useRef } from 'react'
+
 import Signature from '@/components/misc/signature'
 import Footer from '@/components/new/footer'
 import Reveal from '@/components/new/reveal'
@@ -13,8 +15,7 @@ import VelocityMarquee from '@/components/ui/velocity-marquee'
 import { useScrollToTop } from '@/lib/hooks'
 import { motion as Motion } from 'framer-motion'
 import Head from 'next/head'
-import React from 'react'
-import { useRef } from 'react'
+import data from '@/lib/staticData.json'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -90,7 +91,7 @@ export default function About() {
                 enterY={'0%'}
                 typeClass={'typography-sm'}
                 className={'-mb-2 sm:-mb-2'}
-                text={'Volos,'}
+                text={data.info.location.split(' ')[0]}
                 delay={0}
               />
               <TextReveal
@@ -99,56 +100,36 @@ export default function About() {
                 enterY={'0%'}
                 typeClass={'typography-sm'}
                 className={'-mb-2 sm:-mb-2'}
-                text={'Greece'}
+                text={data.info.location.split(' ')[1]}
                 delay={0.25}
               />
             </div>
-            <div className={'w-full flex flex-col sm:w-1/2 lg:w-1/3'}>
+            <div
+              className={
+                'w-full flex flex-col sm:w-1/2 lg:w-1/3 pb-2.5 sm:pb-0'
+              }
+            >
               <TextReveal
                 as={'h5'}
                 lineHeight={'0.9em'}
                 enterY={'10%'}
-                className={'mb-6 sm:mb-6'}
+                className={'mb-0 sm:mb-6'}
                 typeClass={'typography-caps-sm'}
                 text={'Skillset'}
                 delay={0.275}
               />
-              <TextReveal
-                as={'p'}
-                lineHeight={'1em'}
-                enterY={'0%'}
-                typeClass={'typography-sm mr-1'}
-                className={'-mb-2 sm:-mb-2'}
-                text={'Front-end development'}
-                delay={0.475}
-              />
-              <TextReveal
-                as={'p'}
-                lineHeight={'1em'}
-                enterY={'0%'}
-                typeClass={'typography-sm mr-1'}
-                className={'-mb-2 sm:-mb-2'}
-                text={'UI/UX design'}
-                delay={0.675}
-              />
-              <TextReveal
-                as={'p'}
-                lineHeight={'1em'}
-                enterY={'0%'}
-                typeClass={'typography-sm mr-1'}
-                className={'-mb-2 sm:-mb-2'}
-                text={'Motion design'}
-                delay={0.875}
-              />
-              <TextReveal
-                as={'p'}
-                lineHeight={'1em'}
-                enterY={'0%'}
-                typeClass={'typography-sm mr-1'}
-                className={'-mb-2 sm:-mb-2'}
-                text={'Typography design'}
-                delay={1}
-              />
+              {data.info.skillset.map((skill, index) => (
+                <TextReveal
+                  key={index}
+                  as={'p'}
+                  lineHeight={'1em'}
+                  enterY={'0%'}
+                  typeClass={'typography-sm mr-1'}
+                  className={'-mb-2 sm:-mb-2'}
+                  text={skill}
+                  delay={0.275 + index * 0.175}
+                />
+              ))}
             </div>
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <TextReveal
@@ -166,19 +147,12 @@ export default function About() {
                 enterY={'-7%'}
                 className={'mb-4 sm:mb-8'}
                 typeClass={'typography-lg'}
-                text={
-                  'I specialize in front-end development. Being independent, I work with small to large companies, startups, design studios, and creative individuals globally.'
-                }
+                text={data.info.about.title}
                 delay={0}
               />
               <Reveal opacity childrenRef={textRef} duration={1} delay={1.675}>
                 <p className={'typography-base max-w-[620px]'} ref={textRef}>
-                  Designed to save time while maintaining a strong visual
-                  presence on various social media channels, these templates
-                  feature a perfect blend of classic and contemporary styles.
-                  Designed to save time while maintaining a strong visual
-                  presence on various social media channels, these templates
-                  feature a perfect blend of classic and contemporary styles.
+                  {data.info.about.paragraph}
                 </p>
               </Reveal>
             </div>
@@ -193,7 +167,6 @@ export default function About() {
             <div className={'w-1/2 hidden sm:flex'} />
             <div className={'w-full sm:w-1/2 flex flex-col'}>
               <Signature className={'max-w-[432px] z-10 mt-6'} />
-              {/* <div className={'relative w-fit h-fit'}> */}
               <Motion.hr
                 variants={animation}
                 initial={'initial'}
@@ -201,7 +174,6 @@ export default function About() {
                 exit={'exit'}
                 className={'-mt-3.5 pb-8 z-0 inline-block border-black/15'}
               />
-              {/* </div> */}
             </div>
           </Section>
           <Footer />

@@ -4,20 +4,20 @@ import { cn, debounce, useParallax } from '@/lib/utils'
 import {
   DetailedHTMLProps,
   HTMLAttributes,
-  useContext,
   useEffect,
   useRef,
   useState,
 } from 'react'
-import { MainContainerContext } from '@/components/layout/main'
-import { motion as Motion, useScroll } from 'framer-motion'
+import { motion as Motion, useInView, useScroll } from 'framer-motion'
+import { useScrollVelocity } from '@/lib/hooks'
 
 const AspectRatioVideo = ({
   ratio = 1 / 1,
-  responsiveRatio,
-  responsiveBreakpoint = 1080,
+  responsiveRatio = 1 / 1,
+  responsiveBreakpoint = 1280,
   direction = 'down',
   distance = 100,
+  delay = 0,
   src,
   className,
   ...props
@@ -28,11 +28,36 @@ const AspectRatioVideo = ({
   src: string
   direction?: 'up' | 'down'
   distance?: number
+  delay?: number
   className?: string
 }) => {
   const [calculatedRatio, setCalculatedRatio] = useState<number>(ratio)
   const [calculatedDistance, setCalculatedDistance] = useState<number>(distance)
+  const [isDesktop, setIsDesktop] = useState(true)
+
   const targetRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(wrapperRef, { once: true, margin: '20%' })
+
+  const animation = {
+    initial: { y: '0%' },
+    enter: {
+      y: '100%',
+      transition: {
+        duration: 1.675,
+        ease: [1, 0, 0.01, 1],
+        delay: delay,
+      },
+    },
+    exit: {
+      y: '100%',
+      transition: {
+        duration: 1,
+        ease: [1, 0, 0.01, 1],
+        delay: delay / 4,
+      },
+    },
+  }
 
   useEffect(() => {
     setCalculatedRatio(
@@ -41,6 +66,7 @@ const AspectRatioVideo = ({
         : ratio,
     )
     setCalculatedDistance(window.innerWidth < 640 ? distance / 5 : distance)
+    setIsDesktop(window.innerWidth > responsiveBreakpoint)
 
     const handleResize = () => {
       setCalculatedRatio(
@@ -59,10 +85,8 @@ const AspectRatioVideo = ({
     }
   }, [ratio, responsiveRatio, responsiveBreakpoint, distance])
 
-  const mainContainer = useContext(MainContainerContext)
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    container: mainContainer!,
     offset: ['start end', 'end start'],
   })
   const y = useParallax(
@@ -70,16 +94,30 @@ const AspectRatioVideo = ({
     direction === 'down' ? calculatedDistance : calculatedDistance * -1,
   )
 
+  const { calculatedValue: skewValue } = useScrollVelocity(-0.625, 0.625)
+  const index = Math.floor(Math.random() * 10000) + 1
+
   return (
     <div
+      ref={wrapperRef}
       className={cn('relative w-full overflow-hidden', className)}
       {...props}
     >
+      <Motion.div
+        key={index}
+        custom={index}
+        className={'absolute w-full h-[110%] left-0 -top-1 bg-white z-[1]'}
+        variants={animation}
+        initial={'initial'}
+        animate={isInView ? 'enter' : 'exit'}
+        exit={'exit'}
+      />
       <Motion.div
         ref={targetRef}
         className={cn(className)}
         style={{
           y,
+          skew: isDesktop ? skewValue : 0,
           marginBlock: `-${calculatedDistance}px`,
           paddingBottom: `${Math.round((100 / calculatedRatio) * 100) / 100}%`,
         }}

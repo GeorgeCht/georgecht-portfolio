@@ -1,30 +1,23 @@
 'use client'
 
-import Scene from '@/components/3d/scene'
-import BezierCurve from '@/components/new/bezier-curve'
 import Footer from '@/components/new/footer'
 import IntroStripe from '@/components/new/intro-stripe'
 import Reveal from '@/components/new/reveal'
 import Table from '@/components/new/table'
 import TransitionPane from '@/components/transition/pane'
 import AspectRatioImage from '@/components/ui/aspect-ratio-image'
-import Magnetic from '@/components/ui/magnetic'
 import Marquee from '@/components/ui/marquee'
 import Page from '@/components/ui/page'
 import Section from '@/components/ui/section'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import { useScrollToTop } from '@/lib/hooks'
-import { useInView } from 'framer-motion'
+import { getYear } from '@/lib/utils'
 import Head from 'next/head'
-import React, {
-  DetailedHTMLProps,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  RefAttributes,
-  cloneElement,
-} from 'react'
-import { useRef } from 'react'
+
+import React, { useRef } from 'react'
+import data from '@/lib/staticData.json'
+import AspectRatioVideo from '@/components/ui/aspect-ratio-video'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -66,7 +59,7 @@ export default function About() {
                 id={'hero-entry'}
                 className={'ml-2 pl-6'}
                 typeClass={'typography-display'}
-                text={'GeorgeCht©2024'}
+                text={`GeorgeCht©${getYear()}`}
               />
             </Marquee>
           </VelocityMarquee>
@@ -82,8 +75,10 @@ export default function About() {
             />
           </Section>
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <AspectRatioImage
-              src={'/13.png'}
+            <AspectRatioVideo
+              src={
+                '/cloud/assets/dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak'
+              }
               ratio={16 / 9}
               responsiveRatio={1 / 1.1}
               distance={125}
@@ -143,24 +138,20 @@ export default function About() {
           <Section
             withPadding
             withGap
-            className={'sm:flex-row pt-16 sm:pt-48 gap-2.5 w-full'}
+            className={'sm:flex-row pt-0 sm:pt-48 gap-2.5 w-full'}
           >
             <div className={'w-1/6 hidden lg:flex'} />
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <Reveal opacity childrenRef={textRef} duration={1}>
                 <p className={'typography-base max-w-[620px]'} ref={textRef}>
-                  Designed to save time while maintaining a strong visual
-                  presence on various social media channels, these templates
-                  feature a perfect blend of classic and contemporary styles.
+                  {data.info.archive.text[0]}
                 </p>
               </Reveal>
             </div>
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <Reveal opacity childrenRef={textRef} duration={1} delay={0.275}>
                 <p className={'typography-base max-w-[620px]'} ref={textRef}>
-                  Designed to save time while maintaining a strong visual
-                  presence on various social media channels, these templates
-                  feature a perfect blend of classic and contemporary styles.
+                  {data.info.archive.text[1]}
                 </p>
               </Reveal>
             </div>

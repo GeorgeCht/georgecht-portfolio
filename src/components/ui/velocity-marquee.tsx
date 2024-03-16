@@ -40,7 +40,7 @@ const VelocityMarquee = ({
   )
 
   useAnimationFrame((_, delta) => {
-    let moveBy = directionFactor.current * -1.725 * direction * (delta / 1500)
+    let moveBy = directionFactor.current * -0.666 * direction * (delta / 1500)
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1
     } else if (velocityFactor.get() > 0) {
@@ -66,11 +66,8 @@ const VelocityMarquee = ({
       )}
       {...props}
     >
-      <Motion.div
-        className={cn('flex whitespace-nowrap w-[1000vw]')}
-        style={{ x }}
-      >
-        {[...Array(1)].map((_, index) => (
+      <Motion.div className={cn('flex whitespace-nowrap w-auto')} style={{ x }}>
+        {[...Array(3)].map((_, index) => (
           <Motion.span
             key={index}
             className={'flex flex-row gap-2 mr-8'}

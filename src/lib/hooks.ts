@@ -1,35 +1,22 @@
-import exp from 'constants'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useScroll, useSpring, useTransform, useVelocity } from 'framer-motion'
 
-const useClockHours = () => {
-  const [currentHour, setCurrentHour] = useState(new Date().getHours())
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentHour(new Date().getHours())
-    }, 1000)
-
-    return () => clearInterval(intervalId)
-  }, [])
-
-  return String(currentHour < 10 ? '0' + currentHour : currentHour)
+const useScrollVelocity = (min: number = -3.275, max: number = 3.275) => {
+  const { scrollY } = useScroll()
+  const scrollVelocity = useVelocity(scrollY)
+  const springVelocity = useSpring(scrollVelocity, {
+    stiffness: 200,
+    damping: 50,
+  })
+  const calculatedValue = useTransform(
+    springVelocity,
+    [-1000, 1000],
+    [min, max],
+  )
+  return { calculatedValue }
 }
 
-const useClockMinutes = () => {
-  const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes())
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentMinute(new Date().getMinutes())
-    }, 1000)
-
-    return () => clearInterval(intervalId)
-  }, [])
-
-  return String(currentMinute < 10 ? '0' + currentMinute : currentMinute)
-}
-
-export { useClockHours, useClockMinutes }
+export { useScrollVelocity }
 
 const useScrollToTop = () => {
   useEffect(() => {

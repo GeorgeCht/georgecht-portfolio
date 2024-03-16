@@ -3,6 +3,8 @@
 import { cn } from '@/lib/utils'
 import React, { DetailedHTMLProps, HTMLAttributes, forwardRef } from 'react'
 
+// TODO: https://codesandbox.io/p/sandbox/framer-motion-marquee-cxlm5e
+
 const Marquee = forwardRef<
   HTMLElement,
   DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>

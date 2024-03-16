@@ -9,6 +9,11 @@ import { Accordion, AccordionItem } from '@nextui-org/react'
 import useHoverSwipe from '@/stores/hover-swipe'
 import Image from 'next/image'
 import BezierCurve from './bezier-curve'
+import {
+  ProjectDocument,
+  ProjectDocumentData,
+  Simplify,
+} from '../../../prismicio-types'
 
 const projects = [
   {
@@ -150,7 +155,7 @@ const TableHead = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
       className={cn(
-        'flex flex-row-reverse sm:flex-row gap-2.5 pt-20 pb-10 w-full',
+        'flex flex-row-reverse sm:flex-row gap-2.5 pt-6 sm:pt-20 pb-2 sm:pb-10 w-full',
         className,
       )}
       {...props}
@@ -299,7 +304,6 @@ const TableDisplay = ({
   roleField: string
   href: string
   index?: number
-  magnetic?: boolean
 }) => {
   const animation = {
     delay: index * 0.025,
@@ -372,15 +376,11 @@ const TablePreview = () => {
     }
   }
   const ref = useRef<HTMLDivElement>(null)
-  const { setModal, setShow } = useHoverSwipe()
   return (
     <TableRoot fadeBottom viewAll>
       <TableHead />
       <Accordion
         className={'px-0'}
-        onSelectionChange={(e) => {
-          setShow(Array.from(e)[0] === undefined)
-        }}
         motionProps={{
           variants: {
             enter: {
@@ -413,24 +413,22 @@ const TablePreview = () => {
             title={project.title}
             className={'group w-full'}
             classNames={{
-              base: 'base-',
-              heading: 'heading-',
-              trigger: 'trigger-',
               startContent: 'w-full',
               indicator: 'hidden',
               titleWrapper: 'hidden',
-              title: 'title-',
-              subtitle: 'subtitle-',
-              content: 'content-',
+              base: 'base-classes',
+              heading: 'heading-classes',
+              trigger: '',
+              title: 'title-classes',
+              subtitle: 'subtitle-classes',
+              content: 'pt-0 sm:pt-2',
             }}
-            onMouseEnter={() => setModal({ active: true, index: index })}
-            onMouseLeave={() => setModal({ active: false, index: index })}
             startContent={
               <React.Fragment>
                 <div
                   ref={ref}
                   className={
-                    'flex flex-row-reverse sm:flex-row gap-1 sm:gap-2.5 pb-1.5 sm:pb-0 w-full *:transition-all'
+                    'flex flex-row-reverse sm:flex-row gap-1 items-start sm:gap-2.5 pb-1.5 sm:pb-0 w-full *:transition-all *:text-start'
                   }
                 >
                   <div className={'w-1/6 flex lg:flex sm:hidden'}>
@@ -444,19 +442,19 @@ const TablePreview = () => {
                       text={String(project.year)}
                     />
                   </div>
-                  <div className={'w-full sm:w-1/2 lg:w-1/3 text-start'}>
+                  <div className={'w-full sm:w-1/2 lg:w-1/3'}>
                     <TextReveal
                       as={'p'}
                       lineHeight={'1.3em'}
                       enterY={'10%'}
                       delay={animation(index).delay + animation(index).step}
-                      className={'-mb-1 sm:-mb-3.5 w-fit'}
+                      className={'-mb-1 -mt-0.5 sm:-mb-3.5'}
                       typeClass={'typography-md mr-1.5'}
                       text={project.title}
                     />
                   </div>
 
-                  <div className={'w-full sm:w-1/2 lg:w-1/3 text-start'}>
+                  <div className={'w-full sm:w-1/2 lg:w-1/3'}>
                     <TextReveal
                       as={'p'}
                       lineHeight={'1.3em'}
@@ -480,9 +478,9 @@ const TablePreview = () => {
                     />
                   </div>
                 </div>
-                {/* <hr className={'mt-6 border-black/15'} /> */}
                 <BezierCurve
-                  className={'mt-4 -mb-2'}
+                  index={index}
+                  className={'mt-2.5 sm:mt-4 mb-0 sm:-mb-2'}
                   pathClassName={'text-black/30'}
                 />
               </React.Fragment>
@@ -523,6 +521,138 @@ const TablePreview = () => {
   )
 }
 
+const TableRelatedProjects = ({
+  projects,
+}: {
+  projects: {
+    year: number
+    title: string
+    client: string
+    role: string
+    image: string
+    color: string
+  }[]
+}) => {
+  const animation = (index: number) => {
+    return {
+      delay: index * 0.025,
+      step: 0.035,
+    }
+  }
+  const ref = useRef<HTMLDivElement>(null)
+  return (
+    <TableRoot>
+      <TableHead />
+      <Accordion
+        className={'px-0'}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              height: 'auto',
+              transition: {
+                height: {
+                  duration: 1.275,
+                  ease: [1, 0, 0.01, 1],
+                },
+              },
+            },
+            exit: {
+              y: -10,
+              height: 0,
+              transition: {
+                height: {
+                  duration: 1.275 / 2,
+                  ease: [1, 0, 0.01, 1],
+                },
+              },
+            },
+          },
+        }}
+      >
+        {projects.map((project, index) => (
+          <AccordionItem
+            key={index}
+            aria-label={project.title}
+            title={project.title}
+            className={'group w-full'}
+            classNames={{
+              startContent: 'w-full',
+              indicator: 'hidden',
+              titleWrapper: 'hidden',
+              content: 'pt-0 sm:pt-2',
+            }}
+            startContent={
+              <React.Fragment>
+                <div
+                  ref={ref}
+                  className={
+                    'flex flex-row-reverse sm:flex-row gap-1 items-start sm:gap-2.5 pb-1.5 sm:pb-0 w-full *:transition-all *:text-start'
+                  }
+                >
+                  <div className={'w-1/6 flex lg:flex sm:hidden'}>
+                    <TextReveal
+                      as={'p'}
+                      lineHeight={'1em'}
+                      enterY={'10%'}
+                      delay={animation(index).delay}
+                      className={'mb-0 sm:-mb-3.5'}
+                      typeClass={'typography-sm'}
+                      text={String(project.year)}
+                    />
+                  </div>
+                  <div className={'w-full sm:w-1/2 lg:w-1/3'}>
+                    <TextReveal
+                      as={'p'}
+                      lineHeight={'1.3em'}
+                      enterY={'10%'}
+                      delay={animation(index).delay + animation(index).step}
+                      className={'-mb-1 -mt-0.5 sm:-mb-3.5'}
+                      typeClass={'typography-md mr-1.5'}
+                      text={project.title}
+                    />
+                  </div>
+
+                  <div className={'w-full sm:w-1/2 lg:w-1/3'}>
+                    <TextReveal
+                      as={'p'}
+                      lineHeight={'1.3em'}
+                      enterY={'10%'}
+                      delay={animation(index).delay + animation(index).step * 2}
+                      className={'-mb-1 -mt-0.5 sm:-mb-3.5'}
+                      typeClass={'typography-md mr-1.5'}
+                      text={project.client}
+                    />
+                  </div>
+
+                  <div className={'w-1/6 -mt-1 hidden lg:flex'}>
+                    <TextReveal
+                      as={'p'}
+                      lineHeight={'1.3em'}
+                      enterY={'10%'}
+                      delay={animation(index).delay + animation(index).step * 3}
+                      className={'mb-1.5 sm:-mb-3.5'}
+                      typeClass={'typography-md'}
+                      text={project.role}
+                    />
+                  </div>
+                </div>
+                <BezierCurve
+                  index={index}
+                  className={'mt-2.5 sm:mt-4 mb-0 sm:-mb-2'}
+                  pathClassName={'text-black/30'}
+                />
+              </React.Fragment>
+            }
+          >
+            lol
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </TableRoot>
+  )
+}
+
 const TableArchive = () => {
   const { setModal } = useHoverSwipe()
   return (
@@ -545,17 +675,16 @@ const TableArchive = () => {
   )
 }
 
-const TableProject = ({ project }: { project: ArchiveProject }) => {
+const TableProject = ({ project }: { project: ProjectDocument<string> }) => {
   return (
     <TableRoot className={'mb-2.5'}>
-      <TableHead className={'pb-1'} />
+      <TableHead className={'pt-6 pb-1 sm:mb-0 -mb-4'} />
       <TableDisplay
         index={0}
-        magnetic={false}
-        year={project.year}
-        project={project.title}
-        client={project.client}
-        roleField={project.role}
+        year={project.data.year as string | number}
+        project={project.data.title as string}
+        client={project.data.client as string}
+        roleField={project.data.role as string}
         href={'none'}
       />
     </TableRoot>

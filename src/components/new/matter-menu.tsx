@@ -192,7 +192,7 @@ const MatterMenu = ({
   }, [])
 
   return (
-    <div className={'relative'}>
+    <nav className={'relative'}>
       <div ref={scene} className={'w-full h-dvh'} onClick={onClick} />
       {menuItems.map((item, index) => (
         <Link href={item.href} key={index} scroll={false}>
@@ -209,7 +209,7 @@ const MatterMenu = ({
           />
         </Link>
       ))}
-    </div>
+    </nav>
   )
 }
 

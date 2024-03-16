@@ -7,6 +7,9 @@ import LenisProvider from '@/components/providers/lenis'
 import Header from '@/components/layout/header'
 import React from 'react'
 
+import { PrismicPreview } from '@prismicio/next'
+import { repositoryName } from '@/prismicio'
+
 // fix: useLayoutEffect suppress error
 React.useLayoutEffect = React.useEffect
 
@@ -22,9 +25,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <NextUIProvider>
         <Header className={ccneue.className} />
         <main className={`relative w-full h-full ${ccneue.className}`}>
-          <AnimatePresence mode={'wait'}>
-            <Component key={router.route} {...pageProps} />
-          </AnimatePresence>
+          <PrismicPreview repositoryName={repositoryName}>
+            <AnimatePresence mode={'wait'}>
+              <Component key={router.route} {...pageProps} />
+            </AnimatePresence>
+          </PrismicPreview>
         </main>
       </NextUIProvider>
     </LenisProvider>

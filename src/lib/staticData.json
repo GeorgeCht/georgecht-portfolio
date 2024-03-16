@@ -1,0 +1,49 @@
+{
+  "email": "info@georgecht.com",
+  "social": [
+    {
+      "title": "GitHub",
+      "url": "https://github.com"
+    },
+    {
+      "title": "Dribbble",
+      "url": "https://dribbble.com"
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://linkedin.com"
+    },
+    {
+      "title": "Instagram",
+      "url": "https://instagram.com"
+    }
+  ],
+  "info": {
+    "tagline": "Working at the intersection of web development & design",
+    "status": "Currently freelancing",
+    "availability": "from April 2024",
+    "location": "Volos, Greece",
+    "skillset": [
+      "Front-end development",
+      "UI/UX design",
+      "Motion design",
+      "Typography design"
+    ],
+    "about": {
+      "title": "I specialize in front-end development. Being independent, I work with small to large companies, startups, design studios, and creative individuals globally.",
+      "paragraph": "Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles. Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles.",
+      "image": {
+        "src": "/cloud/assets/dqoxwlhrv/image/upload/f_auto,q_auto/v1/georgecht/vgitu8ubrctpnvw2gtb3",
+        "alt": "George Cht profile",
+        "width": 280,
+        "height": 457
+      }
+    },
+    "archive": {
+      "text": [
+        "Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles.",
+        "Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles."
+      ]
+    }
+  }
+}

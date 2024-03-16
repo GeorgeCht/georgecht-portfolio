@@ -1,0 +1,168 @@
+{
+  "id": "media_showcase",
+  "type": "SharedSlice",
+  "name": "ImageShowcase",
+  "description": "MediaShowcase",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Full Width",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "ratio",
+            "placeholder": "16/9"
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "distance",
+            "placeholder": "125"
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "delay",
+            "placeholder": "0.575"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "halfleft",
+      "name": "Half Width - Left",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "ratio",
+            "placeholder": "16/9"
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "distance",
+            "placeholder": "125"
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "delay",
+            "placeholder": "0.575"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "halfright",
+      "name": "Half Width - Right",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "ratio",
+            "placeholder": "16/9"
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "distance",
+            "placeholder": "125"
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "delay",
+            "placeholder": "0.575"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "halfmid",
+      "name": "Half Width - Mid",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "ratio",
+            "placeholder": "16/9"
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "distance",
+            "placeholder": "125"
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "delay",
+            "placeholder": "0.575"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

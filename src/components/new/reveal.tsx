@@ -6,6 +6,7 @@ const Reveal = ({
   children,
   childrenRef,
   className,
+  outterClass,
   delay = 0,
   duration = 1.875,
   opacity = false,
@@ -18,6 +19,7 @@ const Reveal = ({
   duration?: number
   opacity?: boolean
   y?: boolean
+  outterClass?: string
   childrenRef?: React.RefObject<unknown> | null
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -63,7 +65,11 @@ const Reveal = ({
   return (
     <div
       ref={wrapperRef}
-      className={cn('relative w-full h-full', y && 'overflow-hidden')}
+      className={cn(
+        'relative w-full h-full',
+        y && 'overflow-hidden',
+        outterClass,
+      )}
       style={{
         height:
           y && childrenRef !== null && childrenRef !== undefined

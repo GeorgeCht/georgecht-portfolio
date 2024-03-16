@@ -4,25 +4,9 @@ import QRCode from '@/components/new/qr-code'
 import Link from 'next/link'
 import Magnetic from '@/components/ui/magnetic'
 
+import data from '@/lib/staticData.json'
+
 const IntroStripe = () => {
-  const socialItems = [
-    {
-      title: 'GitHub↗',
-      href: '/',
-    },
-    {
-      title: 'Dribbble↗',
-      href: '/',
-    },
-    {
-      title: 'Linked In↗',
-      href: '/',
-    },
-    {
-      title: '@georgecht',
-      href: '/',
-    },
-  ]
   return (
     <React.Fragment>
       <div className={'flex lg:hidden px-2.5 md:px-4 w-full '}>
@@ -32,7 +16,7 @@ const IntroStripe = () => {
           enterY={'10%'}
           className={'mb-1.5 sm:-mb-3.5 mt-2.5 max-w-[620px]'}
           typeClass={'typography-caps-lg mr-1.5'}
-          text={'WORKING AT THE INTERSECTION OF WEB DEVELOPMENT & DESIGN'}
+          text={data.info.tagline}
         />
       </div>
       <div
@@ -49,7 +33,7 @@ const IntroStripe = () => {
             enterY={'10%'}
             className={'mb-1.5 sm:-mb-3.5 -mt-1.5'}
             typeClass={'typography-caps-sm mr-0.5'}
-            text={'Currently freelancing'}
+            text={data.info.status}
           />
           <TextReveal
             as={'span'}
@@ -57,7 +41,7 @@ const IntroStripe = () => {
             enterY={'10%'}
             className={'mb-1.5 sm:-mb-3.5 max-w-[340px] pb-3'}
             typeClass={'typography-caps-md mr-1.5'}
-            text={'Available for new projects from april 2024'}
+            text={`Available for new projects ${data.info.availability}`}
           />
         </div>
         <div
@@ -69,7 +53,7 @@ const IntroStripe = () => {
             enterY={'10%'}
             className={'mb-1.5 sm:-mb-3.5 mt-2.5 max-w-[620px] hidden lg:block'}
             typeClass={'typography-caps-lg mr-1.5'}
-            text={'WORKING AT THE INTERSECTION OF WEB DEVELOPMENT & DESIGN'}
+            text={data.info.tagline}
           />
           <div
             className={
@@ -77,9 +61,9 @@ const IntroStripe = () => {
             }
           >
             <ul className={'flex flex-col items-start sm:items-end mt-1.5'}>
-              {socialItems.map((item, index) => (
+              {data.social.map((item, index) => (
                 <li key={index}>
-                  <Link href={item.href}>
+                  <Link href={item.url}>
                     <Magnetic>
                       <TextReveal
                         as={'span'}
@@ -87,7 +71,11 @@ const IntroStripe = () => {
                         enterY={'10%'}
                         className={'-mb-0.5'}
                         typeClass={'typography-caps-md mr-0.5'}
-                        text={item.title}
+                        text={
+                          item.title !== 'Instagram'
+                            ? `${item.title}↗`
+                            : '@GeorgeCht'
+                        }
                         delay={index * 0.175}
                       />
                     </Magnetic>

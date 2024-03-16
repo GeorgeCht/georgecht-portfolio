@@ -1,0 +1,125 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"ratio": {
+				"__TYPE__": "FieldContent",
+				"value": "15",
+				"type": "Number"
+			},
+			"distance": {
+				"__TYPE__": "FieldContent",
+				"value": "44",
+				"type": "Number"
+			},
+			"delay": {
+				"__TYPE__": "FieldContent",
+				"value": "37",
+				"type": "Number"
+			},
+			"video_url": {
+				"__TYPE__": "FieldContent",
+				"value": "himself",
+				"type": "Text"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "halfleft",
+		"primary": {
+			"ratio": {
+				"__TYPE__": "FieldContent",
+				"value": "3",
+				"type": "Number"
+			},
+			"distance": {
+				"__TYPE__": "FieldContent",
+				"value": "40",
+				"type": "Number"
+			},
+			"delay": {
+				"__TYPE__": "FieldContent",
+				"value": "86",
+				"type": "Number"
+			},
+			"video_url": {
+				"__TYPE__": "FieldContent",
+				"value": "feature",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "halfright",
+		"primary": {
+			"ratio": {
+				"__TYPE__": "FieldContent",
+				"value": "5",
+				"type": "Number"
+			},
+			"distance": {
+				"__TYPE__": "FieldContent",
+				"value": "58",
+				"type": "Number"
+			},
+			"delay": {
+				"__TYPE__": "FieldContent",
+				"value": "14",
+				"type": "Number"
+			},
+			"video_url": {
+				"__TYPE__": "FieldContent",
+				"value": "several",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "halfmid",
+		"primary": {
+			"ratio": {
+				"__TYPE__": "FieldContent",
+				"value": "60",
+				"type": "Number"
+			},
+			"distance": {
+				"__TYPE__": "FieldContent",
+				"value": "38",
+				"type": "Number"
+			},
+			"delay": {
+				"__TYPE__": "FieldContent",
+				"value": "5",
+				"type": "Number"
+			},
+			"video_url": {
+				"__TYPE__": "FieldContent",
+				"value": "changing",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

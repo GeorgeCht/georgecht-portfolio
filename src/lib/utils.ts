@@ -148,3 +148,5 @@ export function getRandomNumber(): string {
 }
 
 export const deltaDiff = (a: number, b: number) => Math.abs(a - b)
+
+export const getYear = () => new Date().getFullYear()

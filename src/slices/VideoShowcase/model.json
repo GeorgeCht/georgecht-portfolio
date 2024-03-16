@@ -1,0 +1,164 @@
+{
+  "id": "video_showcase",
+  "type": "SharedSlice",
+  "name": "VideoShowcase",
+  "description": "VideoShowcase",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Full Width",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "Ratio",
+            "placeholder": ""
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "Distance",
+            "placeholder": ""
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "Delay",
+            "placeholder": ""
+          }
+        },
+        "video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Video URL",
+            "placeholder": "dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "halfleft",
+      "name": "Half Width - Left",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "Ratio",
+            "placeholder": ""
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "Distance",
+            "placeholder": ""
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "Delay",
+            "placeholder": ""
+          }
+        },
+        "video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Video URL",
+            "placeholder": "dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "halfright",
+      "name": "Half Width - Right",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "Ratio",
+            "placeholder": ""
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "Distance",
+            "placeholder": ""
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "Delay",
+            "placeholder": ""
+          }
+        },
+        "video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Video URL",
+            "placeholder": "dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "halfmid",
+      "name": "Half Width - Mid",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "ratio": {
+          "type": "Number",
+          "config": {
+            "label": "Ratio",
+            "placeholder": ""
+          }
+        },
+        "distance": {
+          "type": "Number",
+          "config": {
+            "label": "Distance",
+            "placeholder": ""
+          }
+        },
+        "delay": {
+          "type": "Number",
+          "config": {
+            "label": "Delay",
+            "placeholder": ""
+          }
+        },
+        "video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Video URL",
+            "placeholder": "dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

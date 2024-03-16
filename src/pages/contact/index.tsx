@@ -9,23 +9,20 @@ import Section from '@/components/ui/section'
 import TextReveal from '@/components/ui/text-reveal'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
+import data from '@/lib/staticData.json'
 
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { AnimatePresence, motion as Motion, useInView } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 import { useScrollToTop } from '@/lib/hooks'
-import React, { useRef } from 'react'
-import HoverFlip from '@/components/new/hoverflip'
-import Reveal from '@/components/new/reveal'
+import React, { useEffect, useRef } from 'react'
 import TextRevealFlip from '@/components/ui/text-reveal-flip'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const wrapRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(wrapperRef, { once: true })
   const animation = {
     initial: { y: '0%' },
     enter: {
@@ -46,6 +43,14 @@ export default function About() {
     },
   }
   useScrollToTop()
+
+  useEffect(() => {
+    fetch('/api/prismic')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+      })
+  }, [])
 
   return (
     <React.Fragment>
@@ -85,7 +90,7 @@ export default function About() {
                 as={'h5'}
                 lineHeight={'0.9em'}
                 enterY={'10%'}
-                className={'mb-6 sm:mb-6'}
+                className={'mb-0 sm:mb-6'}
                 typeClass={'typography-caps-sm'}
                 text={'Email'}
               />
@@ -96,7 +101,7 @@ export default function About() {
                     lineHeight={'0.95em'}
                     enterY={'0%'}
                     className={'typography-sm'}
-                    text={'info@georgecht.com'}
+                    text={data.email}
                     delay={0}
                   />
                 </Magnetic>
@@ -107,22 +112,17 @@ export default function About() {
                 as={'h5'}
                 lineHeight={'0.9em'}
                 enterY={'10%'}
-                className={'mb-6 sm:mb-6'}
+                className={'mb-0 sm:mb-6'}
                 typeClass={'typography-caps-sm'}
                 text={'Social'}
                 delay={0.275}
               />
               <ul>
-                {[
-                  { href: '/', text: 'Github' },
-                  { href: '/', text: 'Dribbble' },
-                  { href: '/', text: 'LinkedIn' },
-                  { href: '/', text: 'Instagram' },
-                ].map((link, index) => (
-                  <li key={index}>
+                {data.social.map((item, index) => (
+                  <li className={'sm:mb-0 -mb-2.5'} key={index}>
                     <Link
                       className={'block w-fit'}
-                      href={link.href}
+                      href={item.url}
                       scroll={false}
                     >
                       <Magnetic className={'-mb-1.5'}>
@@ -131,7 +131,7 @@ export default function About() {
                           lineHeight={'0.95em'}
                           enterY={'0%'}
                           className={'typography-sm'}
-                          text={link.text}
+                          text={item.title}
                           delay={0.275 + index * 0.175}
                         />
                       </Magnetic>
@@ -154,12 +154,10 @@ export default function About() {
                 exit={'exit'}
               />
               <Image
-                src={
-                  '/cloud/assets/dqoxwlhrv/image/upload/f_auto,q_auto/v1/georgecht/vgitu8ubrctpnvw2gtb3'
-                }
-                alt={'George cht profile'}
-                width={280}
-                height={457}
+                src={data.info.about.image.src}
+                alt={data.info.about.image.alt}
+                width={data.info.about.image.width}
+                height={data.info.about.image.height}
               />
             </div>
             <div className={'w-1/6 hidden lg:flex'} />

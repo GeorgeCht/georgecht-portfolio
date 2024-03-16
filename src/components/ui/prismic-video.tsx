@@ -1,39 +1,29 @@
 'use client'
 
 import { cn, debounce, useParallax } from '@/lib/utils'
-import { StaticImport } from 'next/dist/shared/lib/get-img-props'
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { HTMLAttributes, useEffect, useRef, useState } from 'react'
 import { motion as Motion, useInView, useScroll } from 'framer-motion'
-import Image from 'next/image'
 import { useScrollVelocity } from '@/lib/hooks'
+import { KeyTextField } from '@prismicio/client'
 
-const AspectRatioImage = ({
+const PrismicVideo = ({
   ratio = 1 / 1,
   responsiveRatio = 1 / 1,
   responsiveBreakpoint = 1280,
-  src,
-  alt = 'Image',
   direction = 'down',
   distance = 100,
   delay = 0,
+  src,
   className,
   ...props
-}: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+}: HTMLAttributes<HTMLDivElement> & {
   ratio?: number
   responsiveRatio?: number
   responsiveBreakpoint?: number
-  alt?: string
-  src: string | StaticImport
+  src: string | KeyTextField
   direction?: 'up' | 'down'
   distance?: number
   delay?: number
-  className?: string
 }) => {
   const [calculatedRatio, setCalculatedRatio] = useState<number>(ratio)
   const [calculatedDistance, setCalculatedDistance] = useState<number>(distance)
@@ -63,6 +53,26 @@ const AspectRatioImage = ({
     },
   }
 
+  const animationScale = {
+    initial: { scale: '110%' },
+    enter: {
+      scale: '100%',
+      transition: {
+        duration: 1.275,
+        ease: [1, 0.5, 0.5, 0.9],
+        delay: delay * 1.1,
+      },
+    },
+    exit: {
+      scale: '110%',
+      transition: {
+        duration: 1,
+        ease: [1, 0, 0.01, 1],
+        delay: (delay * 1.1) / 4,
+      },
+    },
+  }
+
   useEffect(() => {
     setCalculatedRatio(
       window.innerWidth < responsiveBreakpoint && responsiveRatio !== undefined
@@ -70,6 +80,7 @@ const AspectRatioImage = ({
         : ratio,
     )
     setCalculatedDistance(window.innerWidth < 640 ? distance / 5 : distance)
+    setIsDesktop(window.innerWidth > responsiveBreakpoint)
 
     const handleResize = () => {
       setCalculatedRatio(
@@ -79,7 +90,6 @@ const AspectRatioImage = ({
           : ratio,
       )
       setCalculatedDistance(window.innerWidth < 560 ? distance / 5 : distance)
-      setIsDesktop(window.innerWidth > responsiveBreakpoint)
     }
 
     window.addEventListener('resize', debounce(handleResize, 200))
@@ -98,11 +108,9 @@ const AspectRatioImage = ({
     direction === 'down' ? calculatedDistance : calculatedDistance * -1,
   )
 
+  const { calculatedValue: skewValue } = useScrollVelocity(-0.625, 0.625)
   const index = Math.floor(Math.random() * 10000) + 1
 
-  const { calculatedValue: skewValue } = useScrollVelocity(-0.625, 0.625)
-
-  // TODO: Add scaling to image inView
   return (
     <div
       ref={wrapperRef}
@@ -127,11 +135,33 @@ const AspectRatioImage = ({
           paddingBottom: `${Math.round((100 / calculatedRatio) * 100) / 100}%`,
         }}
         className={cn(className)}
+        variants={animationScale}
+        initial={'initial'}
+        animate={isInView ? 'enter' : 'exit'}
+        exit={'exit'}
       >
-        <Image fill priority src={src} className={'object-cover'} alt={alt} />
+        <video
+          className={
+            'object-cover absolute top-0 left-0 w-full h-full pointer-events-none'
+          }
+          autoPlay
+          muted
+          loop
+          controls={false}
+          playsInline
+          preload={'auto'}
+          draggable={false}
+        >
+          <source
+            src={`/cloud/assets/${src as string}`}
+            type={'video/mp4'}
+            className={'absolute pointer-events-none'}
+          />
+          Your browser does not support the video tag.
+        </video>
       </Motion.div>
     </div>
   )
 }
 
-export default AspectRatioImage
+export default PrismicVideo

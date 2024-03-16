@@ -37,7 +37,7 @@ const ProjectEntry = ({
     <Link
       href={href}
       scroll={false}
-      className={cn('flex flex-col w-full md:w-1/3', className)}
+      className={cn('flex flex-col w-full lg:w-1/3', className)}
       {...props}
     >
       <TextReveal
@@ -52,8 +52,8 @@ const ProjectEntry = ({
       <AspectRatioImage
         src={image}
         ratio={9 / 16}
+        responsiveBreakpoint={1024}
         responsiveRatio={1 / 1.1}
-        responsiveBreakpoint={1680}
         distance={125}
         className={'mb-2'}
         delay={index * 0.125}
@@ -112,7 +112,7 @@ export default function About() {
           </VelocityMarquee>
           <Section
             withPadding
-            className={'pt-6 gap-6 sm:gap-0 pb-4 sm:flex-row'}
+            className={'pt-6 gap-6 sm:gap-0 pb-4 lg:flex-row'}
           >
             <ProjectEntry
               title={'Anassa General'}
@@ -138,27 +138,27 @@ export default function About() {
           </Section>
           <Section
             withPadding
-            className={'pt-6 gap-6 sm:gap-0 pb-24 sm:flex-row'}
+            className={'pt-6 gap-6 sm:gap-0 pb-24 lg:flex-row'}
           >
             <ProjectEntry
               title={'Anassa General'}
               year={2022}
               image={'/12.png'}
-              index={1}
+              index={4}
               href={'/project'}
             />
             <ProjectEntry
               title={'Anassa General'}
               year={2022}
               image={'/12.png'}
-              index={2}
+              index={5}
               href={'/project'}
             />
             <ProjectEntry
               title={'Anassa General'}
               year={2022}
               image={'/12.png'}
-              index={3}
+              index={6}
               href={'/project'}
             />
           </Section>

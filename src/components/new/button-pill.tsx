@@ -2,6 +2,8 @@ import Link, { LinkProps } from 'next/link'
 import React, { HTMLAttributes, forwardRef } from 'react'
 import { cn } from '@/lib/utils'
 import Magnetic from '@/components/ui/magnetic'
+import { PrismicNextLink } from '@prismicio/next'
+import { LinkField } from '@prismicio/client'
 
 const PillButton = ({
   href,
@@ -79,6 +81,51 @@ const PillButtonFlip = ({
           {innerText}
         </span>
       </Link>
+    </Magnetic>
+  )
+}
+
+const PillPrismicLink = ({
+  field,
+  reversed = false,
+  innerText,
+  className,
+  childClassName,
+}: {
+  field: LinkField | null | undefined
+  reversed?: boolean
+  innerText: string
+  className?: string
+  childClassName?: string | undefined
+}) => {
+  return (
+    <Magnetic>
+      <PrismicNextLink
+        field={field}
+        className={cn(
+          'group relative inline-block overflow-hidden h-[76%]',
+          'typography-lg border border-black rounded-full hover:cursor-pointer px-2.5 pt-1',
+          reversed
+            ? 'bg-black hover:bg-white hover:text-black text-white'
+            : 'bg-white hover:bg-black hover:text-white',
+          className,
+        )}
+      >
+        <span
+          className={cn(
+            'inline-block relative z-[1] duration-[1.175s] will-change-transform',
+            'ease-[cubic-bezier(0.15,1,0.15,1)] transition-transform',
+            'after:content-[attr(data-text)] after:block after:absolute after:skew-y-[4deg]',
+            'after:origin-[left_top] after:duration-[2s] after:transition-transform',
+            'after:ease-[cubic-bezier(0.19,1,0.22,1)] after:mt-0 after:top-full',
+            'group-hover:translate-y-[-100%] after:group-hover:skew-y-0',
+            childClassName,
+          )}
+          data-text={innerText}
+        >
+          {innerText}
+        </span>
+      </PrismicNextLink>
     </Magnetic>
   )
 }
@@ -194,6 +241,7 @@ const Pill = {
   Matter: PillMatter,
   ButtonFlip: PillButtonFlip,
   ActionFlip: PillActionFlip,
+  PrismicLink: PillPrismicLink,
 }
 
 export default Pill
