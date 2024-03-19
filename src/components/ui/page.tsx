@@ -1,13 +1,21 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import React, { forwardRef, DetailedHTMLProps, HTMLAttributes } from 'react'
+import { cn, setBodyBg } from '@/lib/utils'
+import React, {
+  forwardRef,
+  DetailedHTMLProps,
+  HTMLAttributes,
+  useEffect,
+} from 'react'
 import { Toaster } from 'sonner'
 
 const Page = forwardRef<
   HTMLElement,
   DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
 >(({ children, className, ...props }, ref) => {
+  useEffect(() => {
+    setBodyBg('#fff')
+  }, [])
   return (
     <React.Fragment>
       <article

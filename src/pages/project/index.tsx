@@ -1,10 +1,9 @@
 'use client'
 
-import Footer from '@/components/new/footer'
+import Footer from '@/components/layout/footer'
 import Reveal from '@/components/new/reveal'
 import Table from '@/components/new/table'
 import TransitionPane from '@/components/transition/pane'
-import AspectRatioImage from '@/components/ui/aspect-ratio-image'
 import Page from '@/components/ui/page'
 import Section from '@/components/ui/section'
 import Head from 'next/head'
@@ -14,6 +13,7 @@ import Pill from '@/components/new/button-pill'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import Marquee from '@/components/ui/marquee'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
+import Parallax from '@/components/ui/parallax'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -146,8 +146,9 @@ export default function About() {
           </Section>
 
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <AspectRatioImage
+            <Parallax.Image.Next
               src={'/12.png'}
+              alt={'Project image'}
               ratio={16 / 9}
               responsiveRatio={1 / 1.1}
               distance={125}
@@ -156,8 +157,9 @@ export default function About() {
             />
           </Section>
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <AspectRatioImage
+            <Parallax.Image.Next
               src={'/13.png'}
+              alt={'Project image'}
               ratio={16 / 9}
               responsiveRatio={1 / 1.1}
               distance={125}
@@ -171,8 +173,9 @@ export default function About() {
           >
             <div className={'md:w-1/2 w-full'} />
             <div className={'md:w-1/2 w-full'}>
-              <AspectRatioImage
+              <Parallax.Image.Next
                 src={'/12.png'}
+                alt={'Project image'}
                 ratio={1 / 1.1}
                 responsiveRatio={1 / 1.1}
                 distance={125}
@@ -186,8 +189,9 @@ export default function About() {
             className={'flex-col md:flex-row sm:pt-1.5'}
           >
             <div className={'md:w-1/2 w-full'}>
-              <AspectRatioImage
+              <Parallax.Image.Next
                 src={'/12.png'}
+                alt={'Project image'}
                 ratio={1 / 1.1}
                 responsiveRatio={1 / 1.1}
                 distance={125}

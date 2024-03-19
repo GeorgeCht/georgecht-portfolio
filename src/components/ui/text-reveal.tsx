@@ -1,6 +1,6 @@
 'use client'
 
-import { useInView, motion as Motion } from 'framer-motion'
+import { useInView, motion as Motion, Variants } from 'framer-motion'
 import { ElementType, forwardRef, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -33,7 +33,7 @@ const TextReveal = forwardRef(
     const wrapperRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(wrapperRef, { once: true })
 
-    const animation = {
+    const variants: Variants = {
       initial: { y: '190%', skewY: '8deg' },
       enter: (iteration: number) => ({
         y: enterY,
@@ -75,7 +75,7 @@ const TextReveal = forwardRef(
                 ref={ref}
                 key={index}
                 custom={index}
-                variants={animation}
+                variants={variants}
                 initial={'initial'}
                 className={'inline-block'}
                 animate={isInView ? 'enter' : 'exit'}

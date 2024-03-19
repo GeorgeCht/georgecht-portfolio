@@ -1,6 +1,12 @@
 'use client'
+
 import { cn, lerp } from '@/lib/utils'
-import { HTMLMotionProps, motion as Motion, useInView } from 'framer-motion'
+import {
+  HTMLMotionProps,
+  motion as Motion,
+  Variants,
+  useInView,
+} from 'framer-motion'
 import { useRef, useEffect } from 'react'
 
 interface MouseEvent {
@@ -12,16 +18,18 @@ const BezierCurve = ({
   className,
   pathClassName,
   index = 0,
+  theme = 'dark',
   ...props
 }: HTMLMotionProps<'div'> & {
   pathClassName?: string
   index?: number
+  theme?: 'light' | 'dark'
 }) => {
   const wrapper = useRef<HTMLDivElement>(null)
   const path = useRef<SVGPathElement>(null)
   const isInView = useInView(wrapper, { once: true })
 
-  const animation = {
+  const variants: Variants = {
     initial: { width: '0%' },
     enter: {
       width: '100%',
@@ -103,7 +111,7 @@ const BezierCurve = ({
     <div ref={wrapper}>
       <Motion.div
         className={cn('relative h-px', className)}
-        variants={animation}
+        variants={variants}
         initial={'initial'}
         animate={isInView ? 'enter' : 'exit'}
         exit={'exit'}
@@ -111,15 +119,16 @@ const BezierCurve = ({
       >
         <div
           onMouseEnter={() => handleOnEnter()}
-          onMouseMove={(e) => handleOnMove(e)}
           onMouseLeave={() => handleOnLeave()}
+          onMouseMove={(e) => handleOnMove(e)}
           className={'relative z-10 h-10 w-full top-[-40px]'}
         />
         <svg className={'absolute w-full h-[65px] top-[-40px]'}>
           <path
             ref={path}
             className={cn(
-              'stroke-current w-full text-black stroke-[1px] fill-none',
+              'stroke-current w-full stroke-[1px] fill-none',
+              theme === 'dark' ? 'text-black/30' : 'text-white/30',
               pathClassName,
             )}
           />

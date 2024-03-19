@@ -1,6 +1,6 @@
 'use client'
 
-import { useInView, motion as Motion } from 'framer-motion'
+import { useInView, motion as Motion, Variants } from 'framer-motion'
 import { ElementType, forwardRef, useRef } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -36,7 +36,7 @@ const TextRevealByChar = forwardRef(
     const wrapperRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(wrapperRef, { once: true })
 
-    const animation = {
+    const variants: Variants = {
       initial: { opacity: 0, y: '0%' },
       enter: (iteration: number) => ({
         opacity: 1,
@@ -77,7 +77,7 @@ const TextRevealByChar = forwardRef(
                 ref={ref}
                 key={index}
                 custom={index}
-                variants={animation}
+                variants={variants}
                 initial={'initial'}
                 className={
                   'block ml-[-1.75rem] pl-[0.15rem] pr-[1.75rem] w-fit'
@@ -96,5 +96,4 @@ const TextRevealByChar = forwardRef(
 )
 
 TextRevealByChar.displayName = 'TextRevealByChar'
-
 export default TextRevealByChar

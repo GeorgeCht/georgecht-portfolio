@@ -1,11 +1,11 @@
 import React from 'react'
 import Wrapper from './wrapper'
-import PrismicImage from '@/components/ui/prismic-image'
 import Section from '@/components/ui/section'
 
 import { cn } from '@/lib/utils'
 import { Content, isFilled } from '@prismicio/client'
 import { SliceComponentProps } from '@prismicio/react'
+import Parallax from '@/components/ui/parallax'
 
 /**
  * Props for `MediaShowcase`.
@@ -35,7 +35,7 @@ const MediaShowcase = ({ slice }: MediaShowcaseProps): JSX.Element => {
       data-slice-variation={slice.variation}
     >
       {slice.variation === 'default' ? (
-        <PrismicImage
+        <Parallax.Image.Prismic
           image={slice.primary.image}
           ratio={ratio}
           responsiveRatio={1 / 1.1}
@@ -44,7 +44,7 @@ const MediaShowcase = ({ slice }: MediaShowcaseProps): JSX.Element => {
         />
       ) : (
         <Wrapper slice={slice}>
-          <PrismicImage
+          <Parallax.Image.Prismic
             image={slice.primary.image}
             ratio={ratio}
             responsiveRatio={1 / 1.1}

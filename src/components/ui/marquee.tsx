@@ -3,19 +3,19 @@
 import { cn } from '@/lib/utils'
 import React, { DetailedHTMLProps, HTMLAttributes, forwardRef } from 'react'
 
-// TODO: https://codesandbox.io/p/sandbox/framer-motion-marquee-cxlm5e
-
 const Marquee = forwardRef<
   HTMLElement,
-  DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
->(({ children, className, ...props }, ref) => {
+  DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
+    text?: string
+  }
+>(({ children, text, className, ...props }, ref) => {
+  const duration = (text?.length ?? 15) * 4.175
   return (
     <section
       ref={ref}
-      className={cn(
-        'flex relative w-max animate-marquee [--duration:60s]',
-        className,
-      )}
+      // @ts-expect-error string literal as css property
+      style={{ '--duration': `${duration}s` }}
+      className={cn('flex relative w-max animate-marquee', className)}
       {...props}
     >
       {[...Array(2)].map((_, index) => (
@@ -28,5 +28,4 @@ const Marquee = forwardRef<
 })
 
 Marquee.displayName = 'Marquee'
-
 export default Marquee

@@ -1,4 +1,4 @@
-import { createClient } from '@prismicio/client'
+import * as prismic from '@prismicio/client'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -8,8 +8,13 @@ export default async function handler(
   try {
     if (req.method === 'GET') {
       try {
-        const client = createClient('georgecht-portfolio')
-        const result = await client.getSingle('footer')
+        const client = prismic.createClient('georgecht-portfolio')
+        const result = await client.getAllByType('project', {
+          filters: [
+            prismic.filter.dateYear('document.last_publication_date', 2016),
+            prismic.filter.at('document.type', 'blog-post'),
+          ],
+        })
 
         res.status(200).json(await result)
         res.end()

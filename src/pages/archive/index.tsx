@@ -1,7 +1,7 @@
 'use client'
 
 import Scene from '@/components/3d/scene'
-import Footer from '@/components/new/footer'
+import Footer from '@/components/layout/footer'
 import IntroStripe from '@/components/new/intro-stripe'
 import Reveal from '@/components/new/reveal'
 import Table from '@/components/new/table'

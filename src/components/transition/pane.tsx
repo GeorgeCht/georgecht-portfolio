@@ -1,9 +1,9 @@
 'use client'
 
 import React, { forwardRef, ForwardRefRenderFunction } from 'react'
-import { HTMLMotionProps, motion as Motion, MotionProps } from 'framer-motion'
+import { HTMLMotionProps, motion as Motion, Variants } from 'framer-motion'
 
-const anim = (variants: MotionProps['variants']) => {
+const anim = (variants: Variants) => {
   return {
     variants,
     initial: 'initial',
@@ -23,8 +23,8 @@ const TransitionPane: ForwardRefRenderFunction<
       {...anim({
         initial: {
           opacity: 0,
-          top: -25,
-          scale: 0.975,
+          top: -10,
+          scale: 1.075,
         },
         enter: {
           opacity: 1,
@@ -32,7 +32,7 @@ const TransitionPane: ForwardRefRenderFunction<
           scale: 1,
           transition: {
             duration: 0.475,
-            ease: [1, 0, 0.01, 1],
+            ease: [1, 0.1, 0.1, 1],
           },
           transitionEnd: {
             opacity: 1,
@@ -42,9 +42,9 @@ const TransitionPane: ForwardRefRenderFunction<
         },
         exit: {
           opacity: 0,
-          top: -25,
-          scale: 0.975,
-          transition: { duration: 0.825, ease: [1, 0, 0.01, 1] },
+          top: 10,
+          scale: 1.175,
+          transition: { duration: 0.625, ease: [1, 0.1, 0.1, 1] },
         },
       })}
       {...props}

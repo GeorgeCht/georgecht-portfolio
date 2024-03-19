@@ -1,6 +1,6 @@
 'use client'
 
-import Footer from '@/components/new/footer'
+import Footer from '@/components/layout/footer'
 import TransitionPane from '@/components/transition/pane'
 import Magnetic from '@/components/ui/magnetic'
 import Marquee from '@/components/ui/marquee'
@@ -24,21 +24,21 @@ export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const animation = {
-    initial: { y: '0%' },
+    initial: { maskSize: '100% 0%' },
     enter: {
-      y: '100%',
+      maskSize: '100% 100%',
       transition: {
         duration: 1.675,
         ease: [1, 0, 0.01, 1],
-        delay: 1,
+        delay: 0.825,
       },
     },
     exit: {
-      y: '0%',
+      maskSize: '100% 0%',
       transition: {
-        duration: 1,
+        duration: 0.625,
         ease: [1, 0, 0.01, 1],
-        delay: 1 / 4,
+        delay: 0,
       },
     },
   }
@@ -67,7 +67,7 @@ export default function About() {
       <TransitionPane ref={paneRef}>
         <Page className={'flex flex-col justify-between'}>
           <VelocityMarquee className={'cursor-default'} direction={1}>
-            <Marquee className={'pt-0'}>
+            <Marquee className={'pt-0'} text={'Contact↙Contact↙'}>
               <TextRevealByChar
                 as={'h1'}
                 lineHeight={'1.195em'}
@@ -145,20 +145,23 @@ export default function About() {
               className={'relative w-full sm:w-1/2 lg:w-1/3 overflow-hidden'}
             >
               <Motion.div
-                className={
-                  'absolute w-full h-[110%] left-0 -top-1 bg-white z-[1]'
-                }
+                className={'inset-0 z-[1]'}
                 variants={animation}
                 initial={'initial'}
                 animate={'enter'}
                 exit={'exit'}
-              />
-              <Image
-                src={data.info.about.image.src}
-                alt={data.info.about.image.alt}
-                width={data.info.about.image.width}
-                height={data.info.about.image.height}
-              />
+                style={{
+                  maskImage: 'linear-gradient(to bottom, #000, #000)',
+                  maskRepeat: 'no-repeat',
+                }}
+              >
+                <Image
+                  src={data.info.about.image.src}
+                  alt={data.info.about.image.alt}
+                  width={data.info.about.image.width}
+                  height={data.info.about.image.height}
+                />
+              </Motion.div>
             </div>
             <div className={'w-1/6 hidden lg:flex'} />
           </Section>

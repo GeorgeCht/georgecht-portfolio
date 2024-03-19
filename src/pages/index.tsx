@@ -1,38 +1,65 @@
 'use client'
 
-import Footer from '@/components/new/footer'
+import Footer from '@/components/layout/footer'
 import IntroStripe from '@/components/new/intro-stripe'
 import Reveal from '@/components/new/reveal'
 import Table from '@/components/new/table'
 import TransitionPane from '@/components/transition/pane'
-import AspectRatioImage from '@/components/ui/aspect-ratio-image'
 import Marquee from '@/components/ui/marquee'
 import Page from '@/components/ui/page'
 import Section from '@/components/ui/section'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import { useScrollToTop } from '@/lib/hooks'
-import { getYear } from '@/lib/utils'
+import { getYear, setBodyBg } from '@/lib/utils'
 import Head from 'next/head'
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import data from '@/lib/staticData.json'
-import AspectRatioVideo from '@/components/ui/aspect-ratio-video'
+import {
+  AnimatePresence,
+  motion as Motion,
+  inView,
+  useScroll,
+  useTransform,
+} from 'framer-motion'
+import Parallax from '@/components/ui/parallax'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
-  // const wrapperRef = useRef<HTMLDivElement>(null)
-  // const isInView = useInView(wrapperRef, { once: true })
+  const page = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll()
 
-  // if (isInView) {
-  //   console.log('duplicate home page')
-  // }
+  useEffect(() => {
+    inView('#trigger-dark', () => {
+      setBodyBg('#000')
+    })
+  }, [])
+
+  const offsetTop = useTransform(scrollYProgress, [0, 0.215], ['-200vh', '0vh'])
+  const offsetRound = useTransform(scrollYProgress, [0, 0.195], ['100%', '0%'])
 
   useScrollToTop()
 
-  const setBodyBg = (color: string) => {
-    document.body.style.backgroundColor = color
+  const animation = {
+    initial: { opacity: 0 },
+    enter: {
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: [1, 0, 0.01, 1],
+        delay: 0,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.675,
+        ease: [1, 0, 0.01, 1],
+        delay: 0,
+      },
+    },
   }
 
   return (
@@ -48,25 +75,55 @@ export default function About() {
       </Head>
 
       <TransitionPane ref={paneRef}>
-        <Page>
-          <VelocityMarquee className={'cursor-default'} direction={1}>
+        <Page ref={page}>
+          <AnimatePresence mode={'wait'}>
+            <Motion.div
+              key={9999}
+              custom={9999}
+              variants={animation}
+              initial={'initial'}
+              animate={'enter'}
+              exit={'exit'}
+              className={
+                'flex flex-col items-center justify-center fixed inset-0'
+              }
+              style={{
+                top: offsetTop,
+              }}
+            >
+              <Motion.div className={'bg-black relative w-full h-[50vh]'} />
+              <Motion.div
+                className={
+                  'bg-black relative w-[125vw] h-[calc(50vh+1px)] -mt-[1px]'
+                }
+                style={{
+                  borderBottomLeftRadius: offsetRound,
+                  borderBottomRightRadius: offsetRound,
+                }}
+              />
+            </Motion.div>
+          </AnimatePresence>
+          <VelocityMarquee
+            className={'cursor-default mix-blend-difference'}
+            direction={1}
+          >
             <Marquee className={'pt-0'}>
               <TextRevealByChar
                 as={'h1'}
                 lineHeight={'1.195em'}
                 delay={0}
                 enterY={'22.125%'}
-                id={'hero-entry'}
-                className={'ml-2 pl-6'}
+                className={'ml-2 pl-6 text-white'}
                 typeClass={'typography-display'}
                 text={`GeorgeCht©${getYear()}`}
               />
             </Marquee>
           </VelocityMarquee>
-          <IntroStripe />
+          <IntroStripe id={'trigger-light'} />
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <AspectRatioImage
-              src={'/12.png'}
+            <Parallax.Image.Next
+              src={'/10.png'}
+              alt={'Project image'}
               ratio={16 / 9}
               responsiveRatio={1 / 1.1}
               distance={125}
@@ -75,9 +132,9 @@ export default function About() {
             />
           </Section>
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <AspectRatioVideo
+            <Parallax.Video
               src={
-                '/cloud/assets/dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak'
+                'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak'
               }
               ratio={16 / 9}
               responsiveRatio={1 / 1.1}
@@ -92,8 +149,9 @@ export default function About() {
           >
             <div className={'md:w-1/2 w-full'} />
             <div className={'md:w-1/2 w-full'}>
-              <AspectRatioImage
+              <Parallax.Image.Next
                 src={'/12.png'}
+                alt={'Project image'}
                 ratio={1 / 1.1}
                 responsiveRatio={1 / 1.1}
                 distance={125}
@@ -105,10 +163,12 @@ export default function About() {
             withPadding
             withGap
             className={'flex-col md:flex-row sm:pt-1.5'}
+            id={'trigger-dark'}
           >
             <div className={'md:w-1/2 w-full'}>
-              <AspectRatioImage
+              <Parallax.Image.Next
                 src={'/12.png'}
+                alt={'Project image'}
                 ratio={1 / 1.1}
                 responsiveRatio={1 / 1.1}
                 distance={125}
@@ -124,8 +184,9 @@ export default function About() {
           >
             <div className={'w-1/6 hidden lg:flex'} />
             <div className={'md:w-1/2 w-full'}>
-              <AspectRatioImage
+              <Parallax.Image.Next
                 src={'/12.png'}
+                alt={'Project image'}
                 ratio={1 / 1.1}
                 responsiveRatio={1 / 1.1}
                 distance={125}
@@ -143,22 +204,28 @@ export default function About() {
             <div className={'w-1/6 hidden lg:flex'} />
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <Reveal opacity childrenRef={textRef} duration={1}>
-                <p className={'typography-base max-w-[620px]'} ref={textRef}>
+                <p
+                  className={'typography-base max-w-[620px] text-white'}
+                  ref={textRef}
+                >
                   {data.info.archive.text[0]}
                 </p>
               </Reveal>
             </div>
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <Reveal opacity childrenRef={textRef} duration={1} delay={0.275}>
-                <p className={'typography-base max-w-[620px]'} ref={textRef}>
+                <p
+                  className={'typography-base max-w-[620px] text-white'}
+                  ref={textRef}
+                >
                   {data.info.archive.text[1]}
                 </p>
               </Reveal>
             </div>
             <div className={'w-1/6 hidden lg:flex'} />
           </Section>
-          <Table.Preview />
-          <Footer />
+          <Table.Preview theme={'light'} />
+          <Footer theme={'light'} />
         </Page>
       </TransitionPane>
     </React.Fragment>

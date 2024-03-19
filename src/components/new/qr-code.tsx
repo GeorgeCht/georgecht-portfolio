@@ -1,10 +1,15 @@
 import { useRef } from 'react'
-import { useInView, motion as Motion, SVGMotionProps } from 'framer-motion'
+import {
+  useInView,
+  motion as Motion,
+  SVGMotionProps,
+  Variants,
+} from 'framer-motion'
 
 const QRCode = ({ ...props }: SVGMotionProps<SVGSVGElement>) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(wrapperRef, { once: true })
-  const animation = {
+  const variants: Variants = {
     initial: { y: '120%' },
     enter: {
       y: '0%',
@@ -33,7 +38,7 @@ const QRCode = ({ ...props }: SVGMotionProps<SVGSVGElement>) => {
         viewBox={'0 0 200 200'}
         fill={'none'}
         xmlns={'http://www.w3.org/2000/svg'}
-        variants={animation}
+        variants={variants}
         initial={'initial'}
         animate={isInView ? 'enter' : 'exit'}
         exit={'exit'}

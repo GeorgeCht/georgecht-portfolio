@@ -1,11 +1,11 @@
 import React from 'react'
 import Wrapper from './wrapper'
-import PrismicVideo from '@/components/ui/prismic-video'
 import Section from '@/components/ui/section'
 
 import { cn } from '@/lib/utils'
 import { Content, isFilled } from '@prismicio/client'
 import { SliceComponentProps } from '@prismicio/react'
+import Parallax from '@/components/ui/parallax'
 
 /**
  * Props for `VideoShowcase`.
@@ -35,7 +35,7 @@ const VideoShowcase = ({ slice }: VideoShowcaseProps): JSX.Element => {
       data-slice-variation={slice.variation}
     >
       {slice.variation === 'default' ? (
-        <PrismicVideo
+        <Parallax.Video
           src={slice.primary.video_url as string}
           ratio={ratio}
           distance={distance}
@@ -43,7 +43,7 @@ const VideoShowcase = ({ slice }: VideoShowcaseProps): JSX.Element => {
         />
       ) : (
         <Wrapper slice={slice}>
-          <PrismicVideo
+          <Parallax.Video
             src={slice.primary.video_url as string}
             ratio={ratio}
             responsiveRatio={1 / 1.1}

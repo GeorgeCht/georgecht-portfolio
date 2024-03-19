@@ -3,7 +3,7 @@
 import React, { useRef } from 'react'
 
 import Signature from '@/components/misc/signature'
-import Footer from '@/components/new/footer'
+import Footer from '@/components/layout/footer'
 import Reveal from '@/components/new/reveal'
 import TransitionPane from '@/components/transition/pane'
 import Marquee from '@/components/ui/marquee'
@@ -58,13 +58,12 @@ export default function About() {
       <TransitionPane ref={paneRef}>
         <Page className={'flex flex-col justify-between'}>
           <VelocityMarquee className={'cursor-default'} direction={1}>
-            <Marquee className={'pt-0'}>
+            <Marquee className={'pt-0'} text={'About↙About↙'}>
               <TextRevealByChar
                 as={'h1'}
                 lineHeight={'1.195em'}
                 delay={0}
                 enterY={'22.125%'}
-                id={'hero-entry'}
                 className={'ml-2 pl-6'}
                 typeClass={'typography-display'}
                 text={'About↙About↙'}

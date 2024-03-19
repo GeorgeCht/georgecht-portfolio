@@ -3,17 +3,12 @@ import TextReveal from '@/components/ui/text-reveal'
 import Pill from './button-pill'
 import Reveal from './reveal'
 import Magnetic from '../ui/magnetic'
-import HoverSwipe from './hover-swipe'
 import { cn } from '@/lib/utils'
 import { Accordion, AccordionItem } from '@nextui-org/react'
-import useHoverSwipe from '@/stores/hover-swipe'
 import Image from 'next/image'
 import BezierCurve from './bezier-curve'
-import {
-  ProjectDocument,
-  ProjectDocumentData,
-  Simplify,
-} from '../../../prismicio-types'
+import { ProjectDocument } from '../../../prismicio-types'
+import Link from 'next/link'
 
 const projects = [
   {
@@ -103,19 +98,11 @@ const TableRoot = ({
   className,
   fadeBottom = false,
   viewAll = false,
-  withModal = false,
   ...props
 }: HTMLAttributes<HTMLDivElement> & {
   fadeBottom?: boolean
   viewAll?: boolean
-  withModal?: boolean
 }) => {
-  const { setProjects } = useHoverSwipe()
-
-  useEffect(() => {
-    setProjects(projects)
-  }, [setProjects])
-
   return (
     <section className={cn('mb-48', className)}>
       <div
@@ -146,16 +133,22 @@ const TableRoot = ({
           </div>
         </div>
       )}
-      {withModal && <HoverSwipe />}
     </section>
   )
 }
 
-const TableHead = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
+const TableHead = ({
+  className,
+  theme = 'dark',
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
+  theme?: 'dark' | 'light'
+}) => {
   return (
     <div
       className={cn(
         'flex flex-row-reverse sm:flex-row gap-2.5 pt-6 sm:pt-20 pb-2 sm:pb-10 w-full',
+        theme === 'dark' ? 'text-black' : 'text-white',
         className,
       )}
       {...props}
@@ -368,7 +361,7 @@ const TableDisplay = ({
   )
 }
 
-const TablePreview = () => {
+const TablePreview = ({ theme = 'dark' }: { theme?: 'light' | 'dark' }) => {
   const animation = (index: number) => {
     return {
       delay: index * 0.025,
@@ -377,8 +370,8 @@ const TablePreview = () => {
   }
   const ref = useRef<HTMLDivElement>(null)
   return (
-    <TableRoot fadeBottom viewAll>
-      <TableHead />
+    <TableRoot className={'mb-16 sm:mb-48'} fadeBottom viewAll>
+      <TableHead theme={theme} />
       <Accordion
         className={'px-0'}
         motionProps={{
@@ -416,7 +409,7 @@ const TablePreview = () => {
               startContent: 'w-full',
               indicator: 'hidden',
               titleWrapper: 'hidden',
-              base: 'base-classes',
+              base: theme === 'dark' ? 'text-black' : 'text-white',
               heading: 'heading-classes',
               trigger: '',
               title: 'title-classes',
@@ -427,9 +420,10 @@ const TablePreview = () => {
               <React.Fragment>
                 <div
                   ref={ref}
-                  className={
-                    'flex flex-row-reverse sm:flex-row gap-1 items-start sm:gap-2.5 pb-1.5 sm:pb-0 w-full *:transition-all *:text-start'
-                  }
+                  className={cn(
+                    'flex flex-row-reverse sm:flex-row gap-1 items-start sm:gap-2.5 pb-1.5 sm:pb-0 w-full *:transition-all *:text-start',
+                    theme === 'dark' ? 'text-black' : 'text-white',
+                  )}
                 >
                   <div className={'w-1/6 flex lg:flex sm:hidden'}>
                     <TextReveal
@@ -480,8 +474,8 @@ const TablePreview = () => {
                 </div>
                 <BezierCurve
                   index={index}
+                  theme={theme}
                   className={'mt-2.5 sm:mt-4 mb-0 sm:-mb-2'}
-                  pathClassName={'text-black/30'}
                 />
               </React.Fragment>
             }
@@ -521,7 +515,7 @@ const TablePreview = () => {
   )
 }
 
-const TableRelatedProjects = ({
+const TableRelatedProjectsA = ({
   projects,
 }: {
   projects: {
@@ -654,9 +648,8 @@ const TableRelatedProjects = ({
 }
 
 const TableArchive = () => {
-  const { setModal } = useHoverSwipe()
   return (
-    <TableRoot withModal>
+    <TableRoot>
       <TableHead />
       {projects.map((project, index) => (
         <TableRow
@@ -667,8 +660,6 @@ const TableArchive = () => {
           client={project.client}
           roleField={project.role}
           href={`/archive/${project.title}`}
-          onMouseEnter={() => setModal({ active: true, index: index })}
-          onMouseLeave={() => setModal({ active: false, index: index })}
         />
       ))}
     </TableRoot>
@@ -691,6 +682,80 @@ const TableProject = ({ project }: { project: ProjectDocument<string> }) => {
   )
 }
 
+const TableRelatedProjects = ({
+  projects,
+}: {
+  projects: Array<ProjectDocument<string>> | undefined
+}) => {
+  return (
+    <TableRoot className={'mb-2.5'}>
+      <TableHead className={'pt-6 pb-1 sm:mb-0 -mb-4'} />
+      {projects?.map((project, index) => (
+        <Link
+          key={index}
+          href={`/project/${project.uid}`}
+          target={'_blank'}
+          scroll={false}
+        >
+          <div
+            className={cn(
+              'flex flex-row-reverse sm:flex-row gap-1 items-start sm:gap-2.5 pb-1.5 sm:pb-0 w-full *:transition-all *:text-start',
+            )}
+          >
+            <div className={'w-1/6 flex lg:flex sm:hidden'}>
+              <TextReveal
+                as={'p'}
+                lineHeight={'1em'}
+                enterY={'10%'}
+                delay={index * 0.175}
+                className={'mb-0 sm:-mb-3.5'}
+                typeClass={'typography-sm'}
+                text={String(project.data.year)}
+              />
+            </div>
+            <div className={'w-full sm:w-1/2 lg:w-1/3'}>
+              <TextReveal
+                as={'p'}
+                lineHeight={'1.3em'}
+                enterY={'10%'}
+                delay={index * 0.175}
+                className={'-mb-1 -mt-0.5 sm:-mb-3.5'}
+                typeClass={'typography-md mr-1.5'}
+                text={project.data.title as string}
+              />
+            </div>
+
+            <div className={'w-full sm:w-1/2 lg:w-1/3'}>
+              <TextReveal
+                as={'p'}
+                lineHeight={'1.3em'}
+                enterY={'10%'}
+                delay={index * 0.175 * 2}
+                className={'-mb-1 -mt-0.5 sm:-mb-3.5'}
+                typeClass={'typography-md mr-1.5'}
+                text={project.data.client as string}
+              />
+            </div>
+
+            <div className={'w-1/6 -mt-1 hidden lg:flex'}>
+              <TextReveal
+                as={'p'}
+                lineHeight={'1.3em'}
+                enterY={'10%'}
+                delay={index * 0.175 * 3}
+                className={'mb-1.5 sm:-mb-3.5'}
+                typeClass={'typography-md'}
+                text={project.data.role as string}
+              />
+            </div>
+          </div>
+          <BezierCurve index={index} className={'mt-0 sm:mt-5 mb-4'} />
+        </Link>
+      ))}
+    </TableRoot>
+  )
+}
+
 const Table = {
   Root: TableRoot,
   Head: TableHead,
@@ -698,6 +763,7 @@ const Table = {
   Preview: TablePreview,
   Archive: TableArchive,
   Project: TableProject,
+  RelatedProjects: TableRelatedProjects,
 }
 
 export default Table

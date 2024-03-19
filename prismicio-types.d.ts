@@ -90,6 +90,17 @@ interface ProjectDocumentData {
   description: prismic.KeyTextField
 
   /**
+   * Cover Image field in *Project*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.cover_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  cover_image: prismic.ImageField<never>
+
+  /**
    * Slice Zone field in *Project*
    *
    * - **Field Type**: Slice Zone

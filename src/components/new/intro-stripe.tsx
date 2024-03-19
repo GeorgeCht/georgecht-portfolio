@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { DetailedHTMLProps, HTMLAttributes } from 'react'
 import TextReveal from '@/components/ui/text-reveal'
 import QRCode from '@/components/new/qr-code'
 import Link from 'next/link'
@@ -6,10 +6,17 @@ import Magnetic from '@/components/ui/magnetic'
 
 import data from '@/lib/staticData.json'
 
-const IntroStripe = () => {
+const IntroStripe = ({
+  ...props
+}: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
   return (
     <React.Fragment>
-      <div className={'flex lg:hidden px-2.5 md:px-4 w-full '}>
+      <div
+        className={
+          'flex lg:hidden px-2.5 md:px-4 w-full text-white mix-blend-difference'
+        }
+        {...props}
+      >
         <TextReveal
           as={'h1'}
           lineHeight={'0.985em'}
@@ -25,7 +32,9 @@ const IntroStripe = () => {
         }
       >
         <div
-          className={'flex flex-col w-full sm:w-1/2 lg:w-1/4 justify-between'}
+          className={
+            'flex flex-col w-full sm:w-1/2 lg:w-1/4 justify-between text-white mix-blend-difference'
+          }
         >
           <TextReveal
             as={'h5'}
@@ -45,7 +54,9 @@ const IntroStripe = () => {
           />
         </div>
         <div
-          className={'flex flex-row w-full sm:w-1/2 lg:w-3/4 justify-between'}
+          className={
+            'flex flex-row w-full sm:w-1/2 lg:w-3/4 justify-between text-white mix-blend-difference'
+          }
         >
           <TextReveal
             as={'h1'}
@@ -84,8 +95,10 @@ const IntroStripe = () => {
               ))}
             </ul>
             <QRCode
-              fill={'black'}
-              className={'hidden sm:block h-[124px] w-[124px]'}
+              fill={'white'}
+              className={
+                'hidden text-white mix-blend-difference sm:block h-[124px] w-[124px]'
+              }
             />
           </div>
         </div>

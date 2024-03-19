@@ -150,3 +150,18 @@ export function getRandomNumber(): string {
 export const deltaDiff = (a: number, b: number) => Math.abs(a - b)
 
 export const getYear = () => new Date().getFullYear()
+
+export const setBodyBg = (color: string) => {
+  document.body.style.backgroundColor = color
+}
+
+export const chunkedArray = <T>(
+  array: Array<T>,
+  chunkSize: number,
+): Array<Array<T>> => {
+  const chunked = []
+  for (let i = 0; i < array.length; i += chunkSize) {
+    chunked.push(array.slice(i, i + chunkSize))
+  }
+  return chunked
+}
