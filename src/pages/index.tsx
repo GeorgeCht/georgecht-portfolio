@@ -224,7 +224,7 @@ export default function About() {
             </div>
             <div className={'w-1/6 hidden lg:flex'} />
           </Section>
-          <Table.Preview theme={'light'} />
+          {/* <Table.Preview theme={'light'} /> */}
           <Footer theme={'light'} />
         </Page>
       </TransitionPane>
