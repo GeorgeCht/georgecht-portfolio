@@ -1,33 +1,27 @@
 'use client'
 
-import Scene from '@/components/3d/scene'
+import Head from 'next/head'
+import React, { useRef } from 'react'
+import { useScrollToTop } from '@/lib/hooks'
+import { repositoryName } from '@/prismicio'
+import { createClient } from '@prismicio/client'
+import { InferGetStaticPropsType } from 'next'
+
 import Footer from '@/components/layout/footer'
-import IntroStripe from '@/components/new/intro-stripe'
 import Reveal from '@/components/new/reveal'
-import Table from '@/components/new/table'
+import ArchiveList from '@/components/table/archive-list'
 import TransitionPane from '@/components/transition/pane'
-import AspectRatioImage from '@/components/ui/aspect-ratio-image'
 import Marquee from '@/components/ui/marquee'
 import Page from '@/components/ui/page'
 import Section from '@/components/ui/section'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
-import { useScrollToTop } from '@/lib/hooks'
-import { wait } from '@/lib/utils'
-import Head from 'next/head'
-import React, { useEffect } from 'react'
-import { useRef } from 'react'
 
-export default function About() {
+const Archive = ({
+  archiveData
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
-  // const wrapperRef = useRef<HTMLDivElement>(null)
-  // const isInView = useInView(wrapperRef, { once: true })
-
-  // if (isInView) {
-  //   console.log('duplicate home page')
-  // }
-
   useScrollToTop()
 
   return (
@@ -84,10 +78,20 @@ export default function About() {
             </div>
             <div className={'w-1/6 hidden lg:flex'} />
           </Section>
-          <Table.Archive />
+          <ArchiveList archiveData={archiveData} />
           <Footer />
         </Page>
       </TransitionPane>
     </React.Fragment>
   )
 }
+
+export async function getStaticProps() {
+  const client = createClient(repositoryName)
+  const data = await client.getAllByType('archive')
+  return {
+    props: { archiveData: data }
+  }
+}
+
+export default Archive

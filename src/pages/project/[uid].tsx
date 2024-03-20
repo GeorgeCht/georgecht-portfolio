@@ -2,7 +2,7 @@ import { useScrollToTop } from '@/lib/hooks'
 import { repositoryName } from '@/prismicio'
 import { components } from '@/slices'
 import { createClient, filter, isFilled } from '@prismicio/client'
-import { AllDocumentTypes } from '../../../prismicio-types'
+import { AllDocumentTypes, ProjectDocument } from '../../../prismicio-types'
 import { SliceZone } from '@prismicio/react'
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
@@ -16,6 +16,7 @@ import Table from '@/components/new/table'
 import TransitionPane from '@/components/transition/pane'
 import Page from '@/components/ui/page'
 import ProjectStripe from '@/components/new/project-stripe'
+import RelatedProjects from '@/components/table/related-projects'
 
 type Params = { uid: string }
 
@@ -56,13 +57,13 @@ const Project = ({
                   />
                 </Marquee>
               </VelocityMarquee>
-              <ProjectStripe project={project} />
-              <Table.Project project={project} />
+              <ProjectStripe project={project as ProjectDocument<string>} />
+              <Table.Project project={project as ProjectDocument<string>} />
               <SliceZone slices={project.data.slices} components={components} />
               <VelocityMarquee className={'cursor-default'} direction={1}>
                 <Marquee className={'pt-0'}>
                   <TextRevealByChar
-                    as={'h1'}
+                    as={'h2'}
                     lineHeight={'1.195em'}
                     delay={0}
                     enterY={'22.125%'}
@@ -72,7 +73,7 @@ const Project = ({
                   />
                 </Marquee>
               </VelocityMarquee>
-              <Table.RelatedProjects projects={related} />
+              <RelatedProjects projects={related! as Array<ProjectDocument<string>>} />
               <Footer />
             </Page>
           </TransitionPane>

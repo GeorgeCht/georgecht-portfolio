@@ -4,6 +4,144 @@ import type * as prismic from '@prismicio/client'
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] }
 
+type ArchiveDocumentDataSlicesSlice = never
+
+/**
+ * Content for Archive documents
+ */
+interface ArchiveDocumentData {
+  /**
+   * year field in *Archive*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.year
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  year: prismic.NumberField
+
+  /**
+   * Title field in *Archive*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField
+
+  /**
+   * Client field in *Archive*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.client
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  client: prismic.KeyTextField
+
+  /**
+   * Role field in *Archive*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.role
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  role: prismic.KeyTextField
+
+  /**
+   * Image field in *Archive*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>
+
+  /**
+   * Description field in *Archive*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField
+
+  /**
+   * External Url field in *Archive*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.external_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  external_url: prismic.LinkField
+
+  /**
+   * Slice Zone field in *Archive*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ArchiveDocumentDataSlicesSlice> /**
+   * Meta Description field in *Archive*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: archive.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField
+
+  /**
+   * Meta Image field in *Archive*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: archive.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>
+
+  /**
+   * Meta Title field in *Archive*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: archive.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField
+}
+
+/**
+ * Archive document from Prismic
+ *
+ * - **API ID**: `archive`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ArchiveDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<ArchiveDocumentData>, 'archive', Lang>
+
 type ProjectDocumentDataSlicesSlice = VideoShowcaseSlice | MediaShowcaseSlice
 
 type ProjectDocumentDataSlices1Slice = never
@@ -166,7 +304,7 @@ interface ProjectDocumentData {
 export type ProjectDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<ProjectDocumentData>, 'project', Lang>
 
-export type AllDocumentTypes = ProjectDocument
+export type AllDocumentTypes = ArchiveDocument | ProjectDocument
 
 /**
  * Primary content in *ImageShowcase → Primary*
@@ -684,6 +822,9 @@ declare module '@prismicio/client' {
 
   namespace Content {
     export type {
+      ArchiveDocument,
+      ArchiveDocumentData,
+      ArchiveDocumentDataSlicesSlice,
       ProjectDocument,
       ProjectDocumentData,
       ProjectDocumentDataSlicesSlice,

@@ -165,3 +165,8 @@ export const chunkedArray = <T>(
   }
   return chunked
 }
+
+export function includes(text: string): RegExp {
+  const escapedText = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return new RegExp(`.*${escapedText}.*`, 'i')
+}
