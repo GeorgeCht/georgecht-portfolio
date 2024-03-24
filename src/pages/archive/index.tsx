@@ -18,7 +18,7 @@ import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 
 const Archive = ({
-  archiveData
+  archiveData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
@@ -35,7 +35,6 @@ const Archive = ({
         />
         <link rel={'icon'} href={'/favicon.ico'} />
       </Head>
-
       <TransitionPane ref={paneRef}>
         <Page>
           <VelocityMarquee className={'cursor-default'} direction={1}>
@@ -90,7 +89,7 @@ export async function getStaticProps() {
   const client = createClient(repositoryName)
   const data = await client.getAllByType('archive')
   return {
-    props: { archiveData: data }
+    props: { archiveData: data },
   }
 }
 

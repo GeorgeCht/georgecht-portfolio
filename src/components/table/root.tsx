@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils"
-import { HTMLAttributes } from "react"
-import Reveal from "@/components/new/reveal"
-import Pill from "@/components/new/button-pill"
+import { cn } from '@/lib/utils'
+import { HTMLAttributes } from 'react'
+import Reveal from '@/components/new/reveal'
+import Pill from '@/components/new/button-pill'
 
 const Root = ({
   children,

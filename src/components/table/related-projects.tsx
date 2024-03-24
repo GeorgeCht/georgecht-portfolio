@@ -1,11 +1,11 @@
-import Link from "next/link"
-import BezierCurve from "@/components/new/bezier-curve"
-import TextReveal from "@/components/ui/text-reveal"
-import Root from "./root"
-import Head from "./head"
+import Link from 'next/link'
+import BezierCurve from '@/components/new/bezier-curve'
+import TextReveal from '@/components/ui/text-reveal'
+import Root from './root'
+import Head from './head'
 
-import { cn } from "@/lib/utils"
-import { ProjectDocument } from "../../../prismicio-types"
+import { cn } from '@/lib/utils'
+import { ProjectDocument } from '../../../prismicio-types'
 
 const RelatedProjects = ({
   projects,

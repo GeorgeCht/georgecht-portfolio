@@ -2,23 +2,24 @@
 
 import Footer from '@/components/layout/footer'
 import Reveal from '@/components/new/reveal'
-import Table from '@/components/new/table'
+import Parallax from '@/components/ui/parallax'
 import TransitionPane from '@/components/transition/pane'
 import Page from '@/components/ui/page'
 import Section from '@/components/ui/section'
 import Head from 'next/head'
-import React, { useRef } from 'react'
-import { useScrollToTop } from '@/lib/hooks'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import Marquee from '@/components/ui/marquee'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
-import Link, { LinkProps } from 'next/link'
+import ArchiveList from '@/components/table/archive-list'
 import TextReveal from '@/components/ui/text-reveal'
+
+import React, { useRef } from 'react'
+import Link, { LinkProps } from 'next/link'
+import { useScrollToTop } from '@/lib/hooks'
 import { chunkedArray, cn } from '@/lib/utils'
-import Parallax from '@/components/ui/parallax'
 import { createClient } from '@prismicio/client'
 import { repositoryName } from '@/prismicio'
-import { AllDocumentTypes } from '../../../prismicio-types'
+import { ProjectDocument } from '../../../prismicio-types'
 import { InferGetStaticPropsType } from 'next'
 
 const ProjectEntry = ({
@@ -28,7 +29,7 @@ const ProjectEntry = ({
   ...props
 }: Omit<LinkProps, 'href'> & {
   index: number
-  project: AllDocumentTypes
+  project: ProjectDocument<string>
   className?: string
 }) => {
   const headerRef = useRef<HTMLParagraphElement>(null)
@@ -76,6 +77,7 @@ const ProjectEntry = ({
 
 const Projects = ({
   projects,
+  archiveData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
   useScrollToTop()
@@ -137,7 +139,7 @@ const Projects = ({
               />
             </Marquee>
           </VelocityMarquee>
-          <Table.Preview />
+          <ArchiveList preview archiveData={archiveData} />
           <Footer />
         </Page>
       </TransitionPane>
@@ -147,9 +149,12 @@ const Projects = ({
 
 export async function getStaticProps() {
   const client = createClient(repositoryName)
+  const archiveData = await client.getAllByType('archive', {
+    pageSize: 10,
+  })
 
   let data: {
-    projects: Array<AllDocumentTypes> | undefined
+    projects: Array<ProjectDocument<string>> | undefined
   } = {
     projects: [],
   }
@@ -162,7 +167,7 @@ export async function getStaticProps() {
   const notFound = data.projects ? false : true
 
   return {
-    props: { projects: data.projects },
+    props: { projects: data.projects, archiveData },
     notFound,
   }
 }

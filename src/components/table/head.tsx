@@ -1,15 +1,16 @@
-import { HTMLAttributes } from "react"
-import { cn } from "@/lib/utils"
-import TextReveal from "@/components/ui/text-reveal"
+import { HTMLAttributes } from 'react'
+import { cn } from '@/lib/utils'
+import TextReveal from '@/components/ui/text-reveal'
 
 const Head = ({
   className,
   theme = 'dark',
-  as = 'h3',
+  as = 'h2',
   ...props
-}: HTMLAttributes<HTMLDivElement> & AsProp<'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span'> & {
-  theme?: 'dark' | 'light'
-}) => {
+}: HTMLAttributes<HTMLDivElement> &
+  AsProp<'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span'> & {
+    theme?: 'dark' | 'light'
+  }) => {
   return (
     <div
       className={cn(

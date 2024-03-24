@@ -42,16 +42,3 @@ interface SplitTextWrapperProps
   children: string | React.ReactNode
   className?: string
 }
-
-// eslint-disable-next-line no-unused-vars
-type ArchiveProject = {
-  year: number | string
-  title: string
-  client: string
-  role: string
-  image: string
-  color: string
-}
-
-// eslint-disable-next-line no-unused-vars
-type ArchiveProjects = Array<ArchiveProject>

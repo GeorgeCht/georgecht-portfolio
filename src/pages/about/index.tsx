@@ -13,7 +13,7 @@ import TextReveal from '@/components/ui/text-reveal'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import { useScrollToTop } from '@/lib/hooks'
-import { motion as Motion } from 'framer-motion'
+import { motion as Motion, Variants } from 'framer-motion'
 import Head from 'next/head'
 import data from '@/lib/staticData.json'
 
@@ -21,7 +21,7 @@ export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
-  const animation = {
+  const variants: Variants = {
     initial: { width: '0%' },
     enter: {
       width: '100%',
@@ -57,117 +57,124 @@ export default function About() {
 
       <TransitionPane ref={paneRef}>
         <Page className={'flex flex-col justify-between'}>
-          <VelocityMarquee className={'cursor-default'} direction={1}>
-            <Marquee className={'pt-0'} text={'About↙About↙'}>
-              <TextRevealByChar
-                as={'h1'}
-                lineHeight={'1.195em'}
-                delay={0}
-                enterY={'22.125%'}
-                className={'ml-2 pl-6'}
-                typeClass={'typography-display'}
-                text={'About↙About↙'}
-              />
-            </Marquee>
-          </VelocityMarquee>
-          <Section
-            withPadding
-            withGap
-            className={'sm:flex-row pt-4 sm:pt-2 gap-2.5 w-full'}
-          >
-            <div className={'w-1/6 hidden lg:flex flex-col'}>
-              <TextReveal
-                as={'h5'}
-                lineHeight={'0.9em'}
-                enterY={'10%'}
-                className={'mb-6 sm:mb-6'}
-                typeClass={'typography-caps-sm'}
-                text={'Location'}
-              />
-              <TextReveal
-                as={'p'}
-                lineHeight={'1em'}
-                enterY={'0%'}
-                typeClass={'typography-sm'}
-                className={'-mb-2 sm:-mb-2'}
-                text={data.info.location.split(' ')[0]}
-                delay={0}
-              />
-              <TextReveal
-                as={'p'}
-                lineHeight={'1em'}
-                enterY={'0%'}
-                typeClass={'typography-sm'}
-                className={'-mb-2 sm:-mb-2'}
-                text={data.info.location.split(' ')[1]}
-                delay={0.25}
-              />
-            </div>
-            <div
-              className={
-                'w-full flex flex-col sm:w-1/2 lg:w-1/3 pb-2.5 sm:pb-0'
-              }
+          <section>
+            <VelocityMarquee className={'cursor-default'} direction={1}>
+              <Marquee className={'pt-0'} text={'About↙About↙'}>
+                <TextRevealByChar
+                  as={'h1'}
+                  lineHeight={'1.195em'}
+                  delay={0}
+                  enterY={'22.125%'}
+                  className={'ml-2 pl-6'}
+                  typeClass={'typography-display'}
+                  text={'About↙About↙'}
+                />
+              </Marquee>
+            </VelocityMarquee>
+            <Section
+              withPadding
+              withGap
+              className={'sm:flex-row pt-4 sm:pt-2 gap-2.5 w-full'}
             >
-              <TextReveal
-                as={'h5'}
-                lineHeight={'0.9em'}
-                enterY={'10%'}
-                className={'mb-0 sm:mb-6'}
-                typeClass={'typography-caps-sm'}
-                text={'Skillset'}
-                delay={0.275}
-              />
-              {data.info.skillset.map((skill, index) => (
+              <div className={'w-1/6 hidden lg:flex flex-col'}>
                 <TextReveal
-                  key={index}
+                  as={'h5'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'mb-6 sm:mb-6'}
+                  typeClass={'typography-caps-sm'}
+                  text={'Location'}
+                />
+                <TextReveal
                   as={'p'}
                   lineHeight={'1em'}
                   enterY={'0%'}
-                  typeClass={'typography-sm mr-1'}
+                  typeClass={'typography-sm'}
                   className={'-mb-2 sm:-mb-2'}
-                  text={skill}
-                  delay={0.275 + index * 0.175}
+                  text={data.info.location.split(' ')[0]}
+                  delay={0}
                 />
-              ))}
-            </div>
-            <div className={'w-full sm:w-1/2 lg:w-1/3'}>
-              <TextReveal
-                as={'h5'}
-                lineHeight={'0.9em'}
-                enterY={'10%'}
-                className={'mb-4 sm:mb-8'}
-                typeClass={'typography-caps-sm'}
-                text={'About'}
-                delay={1.275}
-              />
-              <TextReveal
-                as={'h2'}
-                lineHeight={'1em'}
-                enterY={'-7%'}
-                className={'mb-4 sm:mb-8'}
-                typeClass={'typography-lg'}
-                text={data.info.about.title}
-                delay={0}
-              />
-              <Reveal opacity childrenRef={textRef} duration={1} delay={1.675}>
-                <p className={'typography-base max-w-[620px]'} ref={textRef}>
-                  {data.info.about.paragraph}
-                </p>
-              </Reveal>
-            </div>
-            <div className={'w-1/6 hidden lg:flex'} />
-          </Section>
+                <TextReveal
+                  as={'p'}
+                  lineHeight={'1em'}
+                  enterY={'0%'}
+                  typeClass={'typography-sm'}
+                  className={'-mb-2 sm:-mb-2'}
+                  text={data.info.location.split(' ')[1]}
+                  delay={0.25}
+                />
+              </div>
+              <div
+                className={
+                  'w-full flex flex-col sm:w-1/2 lg:w-1/3 pb-2.5 sm:pb-0'
+                }
+              >
+                <TextReveal
+                  as={'h5'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'mb-0 sm:mb-6'}
+                  typeClass={'typography-caps-sm'}
+                  text={'Skillset'}
+                  delay={0.275}
+                />
+                {data.info.skillset.map((skill, index) => (
+                  <TextReveal
+                    key={index}
+                    as={'p'}
+                    lineHeight={'1em'}
+                    enterY={'0%'}
+                    typeClass={'typography-sm mr-1'}
+                    className={'-mb-2 sm:-mb-2'}
+                    text={skill}
+                    delay={0.275 + index * 0.175}
+                  />
+                ))}
+              </div>
+              <div className={'w-full sm:w-1/2 lg:w-1/3'}>
+                <TextReveal
+                  as={'h5'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'mb-4 sm:mb-8'}
+                  typeClass={'typography-caps-sm'}
+                  text={'About'}
+                  delay={1.275}
+                />
+                <TextReveal
+                  as={'h2'}
+                  lineHeight={'1em'}
+                  enterY={'-7%'}
+                  className={'mb-4 sm:mb-8'}
+                  typeClass={'typography-lg'}
+                  text={data.info.about.title}
+                  delay={0}
+                />
+                <Reveal
+                  opacity
+                  childrenRef={textRef}
+                  duration={1}
+                  delay={1.675}
+                >
+                  <p className={'typography-base max-w-[620px]'} ref={textRef}>
+                    {data.info.about.paragraph}
+                  </p>
+                </Reveal>
+              </div>
+              <div className={'w-1/6 hidden lg:flex'} />
+            </Section>
+          </section>
           <Section
             withPadding
             withGap
             ref={sectionRef}
-            className={'sm:flex-row pt-8 pb-24 sm:pt-32 gap-2.5 w-full'}
+            className={'sm:flex-row gap-2.5 w-full'}
           >
             <div className={'w-1/2 hidden sm:flex'} />
             <div className={'w-full sm:w-1/2 flex flex-col'}>
               <Signature className={'max-w-[432px] z-10 mt-6'} />
               <Motion.hr
-                variants={animation}
+                variants={variants}
                 initial={'initial'}
                 animate={'enter'}
                 exit={'exit'}

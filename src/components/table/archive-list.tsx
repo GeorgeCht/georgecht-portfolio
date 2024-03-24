@@ -1,28 +1,42 @@
-import { Accordion, AccordionItem } from "@nextui-org/react"
-import Head from "./head"
-import Root from "./root"
-import { ArchiveDocument } from "../../../prismicio-types"
-import { useRef } from "react"
-import React from "react"
-import { cn } from "@/lib/utils"
-import TextReveal from "../ui/text-reveal"
-import BezierCurve from "../new/bezier-curve"
-import { PrismicNextImage } from "@prismicio/next"
-import { isFilled } from "@prismicio/client"
-import { PrismicRichText } from "@prismicio/react"
-import Pill from "../new/button-pill"
+import { Accordion, AccordionItem } from '@nextui-org/react'
+import Head from './head'
+import Root from './root'
+import { ArchiveDocument } from '../../../prismicio-types'
+import { useRef } from 'react'
+import React from 'react'
+import { cn } from '@/lib/utils'
+import TextReveal from '../ui/text-reveal'
+import BezierCurve from '../new/bezier-curve'
+import { PrismicNextImage } from '@prismicio/next'
+import { isFilled } from '@prismicio/client'
+import { PrismicRichText } from '@prismicio/react'
+import Pill from '../new/button-pill'
 
-
-const ArchiveList = ({ archiveData, theme = 'dark', preview = false } : { archiveData: Array<ArchiveDocument<string>>, theme?: 'light' | 'dark', preview?: boolean }) => {
+const ArchiveList = ({
+  archiveData,
+  theme = 'dark',
+  preview = false,
+}: {
+  archiveData: Array<ArchiveDocument<string>>
+  theme?: 'light' | 'dark'
+  preview?: boolean
+}) => {
   const ref = useRef<HTMLDivElement>(null)
+  const data = preview ? archiveData.slice(0, 8) : archiveData
   const animation = (index: number) => {
     return {
       delay: index * 0.025,
       step: 0.035,
     }
   }
+
   return (
-    <Root className={'mb-16 sm:mb-48'} theme={theme} fadeBottom={preview} viewAll={preview}>
+    <Root
+      className={'mb-16 sm:mb-48'}
+      theme={theme}
+      fadeBottom={preview}
+      viewAll={preview}
+    >
       <Head theme={theme} />
       <Accordion
         className={'px-0'}
@@ -51,7 +65,7 @@ const ArchiveList = ({ archiveData, theme = 'dark', preview = false } : { archiv
           },
         }}
       >
-        {archiveData.map((archiveEntry, index) => (
+        {data.map((archiveEntry, index) => (
           <AccordionItem
             key={index}
             aria-label={archiveEntry.data.title as string}
@@ -131,7 +145,11 @@ const ArchiveList = ({ archiveData, theme = 'dark', preview = false } : { archiv
               <div className={'md:w-1/2 w-full'} />
               <div className={'md:w-1/2 w-full'}>
                 {isFilled.image(archiveEntry.data.image) && (
-                  <PrismicNextImage priority className={'mb-2'} field={archiveEntry.data.image} />
+                  <PrismicNextImage
+                    priority
+                    className={'mb-2'}
+                    field={archiveEntry.data.image}
+                  />
                 )}
                 {isFilled.richText(archiveEntry.data.description) && (
                   <div className={'typography-base max-w-[620px]'}>

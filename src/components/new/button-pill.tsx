@@ -170,7 +170,7 @@ const PillActionFlip = ({
         type={'button'}
         className={cn(
           'group relative inline-block overflow-hidden h-[76%]',
-          'typography-lg bg-white hover:cursor-pointer px-2.5 pt-1',
+          'typography-lg bg-white text-black hover:cursor-pointer px-2.5 pt-1',
           'hover:text-white border border-black rounded-full overflow-hidden',
           'hover:bg-white md:hover:bg-black hover:text-black md:hover:text-white',
           'active:bg-black active:text-white',

@@ -12,11 +12,11 @@ import VelocityMarquee from '@/components/ui/velocity-marquee'
 import Marquee from '@/components/ui/marquee'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import Footer from '@/components/layout/footer'
-import Table from '@/components/new/table'
 import TransitionPane from '@/components/transition/pane'
 import Page from '@/components/ui/page'
 import ProjectStripe from '@/components/new/project-stripe'
 import RelatedProjects from '@/components/table/related-projects'
+import TableProject from '@/components/table/project'
 
 type Params = { uid: string }
 
@@ -58,7 +58,7 @@ const Project = ({
                 </Marquee>
               </VelocityMarquee>
               <ProjectStripe project={project as ProjectDocument<string>} />
-              <Table.Project project={project as ProjectDocument<string>} />
+              <TableProject project={project as ProjectDocument<string>} />
               <SliceZone slices={project.data.slices} components={components} />
               <VelocityMarquee className={'cursor-default'} direction={1}>
                 <Marquee className={'pt-0'}>
@@ -73,7 +73,9 @@ const Project = ({
                   />
                 </Marquee>
               </VelocityMarquee>
-              <RelatedProjects projects={related! as Array<ProjectDocument<string>>} />
+              <RelatedProjects
+                projects={related! as Array<ProjectDocument<string>>}
+              />
               <Footer />
             </Page>
           </TransitionPane>

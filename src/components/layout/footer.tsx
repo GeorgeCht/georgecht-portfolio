@@ -52,7 +52,7 @@ const Footer = ({
       <div className={'w-1/6 hidden lg:flex'} />
       <div className={'w-full sm:w-1/2 lg:w-1/3'}>
         <TextReveal
-          as={'h5'}
+          as={'span'}
           lineHeight={'0.9em'}
           enterY={'10%'}
           className={'mb-1.5 sm:-mb-3.5 pb-2.5 sm:pb-0 cursor-default'}
@@ -96,7 +96,7 @@ const Footer = ({
       >
         <div>
           <TextReveal
-            as={'h5'}
+            as={'span'}
             lineHeight={'0.85em'}
             enterY={'10%'}
             delay={animation.step * 2}

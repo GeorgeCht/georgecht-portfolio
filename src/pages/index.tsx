@@ -3,15 +3,14 @@
 import Footer from '@/components/layout/footer'
 import IntroStripe from '@/components/new/intro-stripe'
 import Reveal from '@/components/new/reveal'
-import Table from '@/components/new/table'
 import TransitionPane from '@/components/transition/pane'
 import Marquee from '@/components/ui/marquee'
 import Page from '@/components/ui/page'
 import Section from '@/components/ui/section'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
-import { useScrollToTop } from '@/lib/hooks'
-import { getYear, setBodyBg } from '@/lib/utils'
+import ArchiveList from '@/components/table/archive-list'
+import Parallax from '@/components/ui/parallax'
 import Head from 'next/head'
 
 import React, { useEffect, useRef } from 'react'
@@ -19,17 +18,28 @@ import data from '@/lib/staticData.json'
 import {
   AnimatePresence,
   motion as Motion,
+  Variants,
   inView,
   useScroll,
   useTransform,
 } from 'framer-motion'
-import Parallax from '@/components/ui/parallax'
+import { createClient } from '@prismicio/client'
+import { repositoryName } from '@/prismicio'
+import { useScrollToTop } from '@/lib/hooks'
+import { getYear, setBodyBg } from '@/lib/utils'
+import { InferGetStaticPropsType } from 'next'
 
-export default function About() {
+const Home = ({
+  archiveData,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
   const page = useRef<HTMLElement>(null)
+  useScrollToTop()
+
   const { scrollYProgress } = useScroll()
+  const offsetTop = useTransform(scrollYProgress, [0, 0.215], ['-200vh', '0vh'])
+  const offsetRound = useTransform(scrollYProgress, [0, 0.195], ['100%', '0%'])
 
   useEffect(() => {
     inView('#trigger-dark', () => {
@@ -37,12 +47,7 @@ export default function About() {
     })
   }, [])
 
-  const offsetTop = useTransform(scrollYProgress, [0, 0.215], ['-200vh', '0vh'])
-  const offsetRound = useTransform(scrollYProgress, [0, 0.195], ['100%', '0%'])
-
-  useScrollToTop()
-
-  const animation = {
+  const variants: Variants = {
     initial: { opacity: 0 },
     enter: {
       opacity: 1,
@@ -80,7 +85,7 @@ export default function About() {
             <Motion.div
               key={9999}
               custom={9999}
-              variants={animation}
+              variants={variants}
               initial={'initial'}
               animate={'enter'}
               exit={'exit'}
@@ -224,10 +229,22 @@ export default function About() {
             </div>
             <div className={'w-1/6 hidden lg:flex'} />
           </Section>
-          <Table.Preview theme={'light'} />
+          <ArchiveList preview theme={'light'} archiveData={archiveData} />
           <Footer theme={'light'} />
         </Page>
       </TransitionPane>
     </React.Fragment>
   )
 }
+
+export async function getStaticProps() {
+  const client = createClient(repositoryName)
+  const data = await client.getAllByType('archive', {
+    pageSize: 10,
+  })
+  return {
+    props: { archiveData: data },
+  }
+}
+
+export default Home

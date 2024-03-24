@@ -17,7 +17,7 @@ import Link from 'next/link'
 
 import { motion as Motion } from 'framer-motion'
 import { useScrollToTop } from '@/lib/hooks'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import TextRevealFlip from '@/components/ui/text-reveal-flip'
 
 export default function About() {
@@ -43,14 +43,6 @@ export default function About() {
     },
   }
   useScrollToTop()
-
-  useEffect(() => {
-    fetch('/api/prismic')
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-      })
-  }, [])
 
   return (
     <React.Fragment>

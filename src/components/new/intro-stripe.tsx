@@ -37,7 +37,7 @@ const IntroStripe = ({
           }
         >
           <TextReveal
-            as={'h5'}
+            as={'h2'}
             lineHeight={'0.85em'}
             enterY={'10%'}
             className={'mb-1.5 sm:-mb-3.5 -mt-1.5'}
