@@ -11,14 +11,6 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/cloud/assets/:path*',
-        destination: `https://res.cloudinary.com/:path*`,
-      },
-    ]
-  },
 }
 
 export default nextConfig

@@ -145,7 +145,7 @@ const ParallaxVideo = ({ src, ...props }: ParallaxVideoProps) => {
         draggable={false}
       >
         <source
-          src={`/cloud/assets/${src as string}`}
+          src={`https://res.cloudinary.com/${src as string}`}
           type={'video/mp4'}
           className={'absolute pointer-events-none'}
         />
