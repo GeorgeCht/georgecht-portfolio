@@ -119,7 +119,7 @@ export async function getStaticPaths() {
 
   return {
     paths: allProjects.map((project) => `/project/${project.uid}`),
-    fallback: true,
+    fallback: false,
   }
 }
 
