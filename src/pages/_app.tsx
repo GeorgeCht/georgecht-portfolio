@@ -4,7 +4,6 @@ import { NextUIProvider } from '@nextui-org/react'
 import localFont from 'next/font/local'
 import type { AppProps } from 'next/app'
 import LenisProvider from '@/components/providers/lenis'
-import Header from '@/components/layout/header'
 import React from 'react'
 
 import { PrismicPreview } from '@prismicio/next'

@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "playwright test",
+    "test:lighthouse": "npm run build && npx serve@latest out && lhci autorun",
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
