@@ -123,7 +123,7 @@ export default function About() {
                           lineHeight={'0.95em'}
                           enterY={'0%'}
                           className={'typography-sm'}
-                          text={item.title}
+                          text={`${item.title}↗`}
                           delay={0.275 + index * 0.175}
                         />
                       </Magnetic>

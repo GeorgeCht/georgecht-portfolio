@@ -23,13 +23,11 @@ const TransitionPane: ForwardRefRenderFunction<
       {...anim({
         initial: {
           opacity: 0,
-          top: -10,
-          scale: 1.075,
+          top: -5,
         },
         enter: {
           opacity: 1,
           top: 0,
-          scale: 1,
           transition: {
             duration: 0.475,
             ease: [1, 0.1, 0.1, 1],
@@ -37,13 +35,11 @@ const TransitionPane: ForwardRefRenderFunction<
           transitionEnd: {
             opacity: 1,
             top: 0,
-            scale: 1,
           },
         },
         exit: {
           opacity: 0,
-          top: 10,
-          scale: 1.175,
+          top: 5,
           transition: { duration: 0.625, ease: [1, 0.1, 0.1, 1] },
         },
       })}

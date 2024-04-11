@@ -43,7 +43,7 @@ const Footer = ({
   return (
     <footer
       className={cn(
-        'flex flex-col pt-4 pb-2 sm:flex-row gap-2.5 px-2.5 md:px-4 w-full',
+        'flex flex-col pt-4 pb-2 sm:flex-row gap-2.5 px-2 w-full',
         theme === 'dark' ? 'text-black' : 'text-white',
         className,
       )}

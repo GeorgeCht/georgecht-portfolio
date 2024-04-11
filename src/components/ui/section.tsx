@@ -19,7 +19,7 @@ const Section = forwardRef<
         ref={ref}
         className={cn(
           'flex flex-col relative overflow-hidden',
-          withPadding && 'px-2.5 md:px-4',
+          withPadding && 'px-2',
           withGap && 'gap-1 sm:gap-2.5',
           className,
         )}

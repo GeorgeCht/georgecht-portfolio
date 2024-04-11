@@ -21,7 +21,7 @@ export interface ParallaxRootProps extends HTMLAttributes<HTMLDivElement> {
 
 const ParallaxRoot = ({
   ratio = 1 / 1,
-  responsiveRatio = 1 / 1,
+  responsiveRatio = ratio,
   responsiveBreakpoint = 1280,
   direction = 'down',
   distance = 100,
@@ -36,7 +36,7 @@ const ParallaxRoot = ({
 
   const targetRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(wrapperRef, { once: true })
+  const isInView = useInView(wrapperRef, { once: true, margin: '100px' })
 
   const motionVariants: Variants = {
     initial: { scale: '110%', maskSize: '100% 0%' },

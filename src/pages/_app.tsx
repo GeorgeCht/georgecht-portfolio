@@ -9,6 +9,7 @@ import React from 'react'
 
 import { PrismicPreview } from '@prismicio/next'
 import { repositoryName } from '@/prismicio'
+import HeaderAlt from '@/components/layout/header-alt'
 
 // fix: useLayoutEffect suppress error
 React.useLayoutEffect = React.useEffect
@@ -23,7 +24,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <LenisProvider>
       <NextUIProvider>
-        <Header className={ccneue.className} />
+        <HeaderAlt className={ccneue.className} />
         <main className={`relative w-full h-full ${ccneue.className}`}>
           <PrismicPreview repositoryName={repositoryName}>
             <AnimatePresence mode={'wait'}>

@@ -4,6 +4,7 @@ import { ProjectDocument } from '../../../prismicio-types'
 import Pill from '@/components/new/button-pill'
 import Reveal from '@/components/new/reveal'
 import Section from '@/components/ui/section'
+import { isFilled } from '@prismicio/client'
 
 const ProjectStripe = ({ project }: { project: ProjectDocument<string> }) => {
   const data = project.data
@@ -57,22 +58,24 @@ const ProjectStripe = ({ project }: { project: ProjectDocument<string> }) => {
       <div
         className={'w-full lg:w-1/6 pt-0 sm:pt-4 flex flex-col pb-2 lg:pb-0'}
       >
-        <Reveal
-          y={false}
-          className={'h-[42px]'}
-          height={42}
-          childrenRef={buttonRef}
-          opacity
-          delay={0.175}
-        >
-          <div className={'block relative pt-2'} ref={buttonRef}>
-            <Pill.PrismicLink
-              innerText={'Visit ↗'}
-              field={data.external_url}
-              reversed
-            />
-          </div>
-        </Reveal>
+        {isFilled.link(data.external_url) && (
+          <Reveal
+            y={false}
+            className={'h-[42px]'}
+            height={42}
+            childrenRef={buttonRef}
+            opacity
+            delay={0.175}
+          >
+            <div className={'block relative pt-2'} ref={buttonRef}>
+              <Pill.PrismicLink
+                innerText={'Visit ↗'}
+                field={data.external_url}
+                reversed
+              />
+            </div>
+          </Reveal>
+        )}
         <Reveal
           y={false}
           className={'h-[42px]'}

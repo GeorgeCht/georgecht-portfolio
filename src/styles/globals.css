@@ -44,6 +44,13 @@ body {
     @apply leading-none;
     @apply uppercase;
   }
+  .typography-display-intro {
+    @apply text-[240px] sm:text-[13.575vw];
+    @apply font-variation-[400];
+    @apply tracking-[-0.04em];
+    @apply leading-none;
+    @apply uppercase;
+  }
   .typography-caps-lg {
     @apply desktop:text-5xl lg:text-[3.625vw] text-[38px];
     @apply font-variation-light;

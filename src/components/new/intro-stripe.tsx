@@ -12,9 +12,7 @@ const IntroStripe = ({
   return (
     <React.Fragment>
       <div
-        className={
-          'flex lg:hidden px-2.5 md:px-4 w-full text-white mix-blend-difference'
-        }
+        className={'flex lg:hidden px-2 w-full text-white mix-blend-difference'}
         {...props}
       >
         <TextReveal
@@ -28,7 +26,7 @@ const IntroStripe = ({
       </div>
       <div
         className={
-          'flex flex-col sm:flex-row gap-2.5 px-2.5 md:px-4 pt-0 sm:pt-4 lg:pt-6 w-full'
+          'flex flex-col sm:flex-row gap-2.5 px-2 pt-0 sm:pt-4 lg:pt-6 w-full'
         }
       >
         <div
