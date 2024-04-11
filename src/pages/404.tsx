@@ -2,11 +2,11 @@
 
 import TransitionPane from '@/components/transition/pane'
 import Page from '@/components/ui/page'
-import Head from 'next/head'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import TextReveal from '@/components/ui/text-reveal'
 
 import React, { useRef } from 'react'
+import PageHead from '@/components/misc/page-head'
 
 export default function Error() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -14,19 +14,13 @@ export default function Error() {
 
   return (
     <React.Fragment>
-      <Head>
-        <title>Page not found | GeorgeCht</title>
-        <meta name={'description'} content={'Page not found'} />
-        <meta
-          name={'viewport'}
-          content={'width=device-width, initial-scale=1'} />
-        <link rel={'icon'} href={'/favicon.ico'} />
-      </Head>
-
+      <PageHead title={'Page not Found'} />
       <TransitionPane ref={paneRef}>
         <Page className={'justify-start'} ref={page}>
           <div
-            className={'md:absolute flex flex-col left-0 -top-3 transition-opacity mt-14 md:mt-0'}
+            className={
+              'md:absolute flex flex-col left-0 -top-3 transition-opacity mt-14 md:mt-0'
+            }
           >
             <TextRevealByChar
               as={'h2'}
@@ -35,7 +29,7 @@ export default function Error() {
               enterY={'22.125%'}
               className={'-ml-0 md:ml-0 pl-6'}
               typeClass={'typography-display-intro'}
-              text={`↙`} 
+              text={`↙`}
             />
             <TextRevealByChar
               as={'h1'}
@@ -44,7 +38,7 @@ export default function Error() {
               enterY={'22.125%'}
               className={'ml-2 pl-6 -mt-[2.375vw]'}
               typeClass={'typography-display-intro'}
-              text={`404`} 
+              text={`404`}
             />
             <TextReveal
               as={'span'}
@@ -66,5 +60,5 @@ export default function Error() {
         </Page>
       </TransitionPane>
     </React.Fragment>
-  );
+  )
 }

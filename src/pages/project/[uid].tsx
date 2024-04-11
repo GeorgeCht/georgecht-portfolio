@@ -1,13 +1,12 @@
 import { useScrollToTop } from '@/lib/hooks'
 import { repositoryName } from '@/prismicio'
 import { components } from '@/slices'
-import { createClient, filter, isFilled } from '@prismicio/client'
+import { createClient, filter } from '@prismicio/client'
 import { AllDocumentTypes, ProjectDocument } from '../../../prismicio-types'
 import { SliceZone } from '@prismicio/react'
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
 import React, { useRef } from 'react'
-import Head from 'next/head'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import Marquee from '@/components/ui/marquee'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
@@ -17,6 +16,7 @@ import Page from '@/components/ui/page'
 import ProjectStripe from '@/components/new/project-stripe'
 import RelatedProjects from '@/components/table/related-projects'
 import TableProject from '@/components/table/project'
+import PageHead from '@/components/misc/page-head'
 
 type Params = { uid: string }
 
@@ -25,8 +25,22 @@ const Project = ({
   related,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
-  const pageTitle = `${project!.data.title} — Project Showcase | GeorgeCht`
+  const relatedProjects = sortRelatedProjects(
+    related as Array<ProjectDocument<string>>,
+    project!.id,
+  )
   useScrollToTop()
+
+  function sortRelatedProjects(
+    relatedProjects: Array<ProjectDocument<string>>,
+    id: string,
+  ): Array<ProjectDocument<string>> {
+    const index = relatedProjects.findIndex((project) => project.id === id)
+    if (index !== -1) {
+      relatedProjects.splice(index, 1)
+    }
+    return relatedProjects.slice(0, 3)
+  }
 
   return (
     <React.Fragment>
@@ -34,22 +48,7 @@ const Project = ({
         <React.Fragment />
       ) : (
         <React.Fragment>
-          <Head>
-            <title>{pageTitle}</title>
-            {isFilled.keyText(project.data.meta_description) ? (
-              <meta
-                name={'description'}
-                key={'desc'}
-                content={project.data.meta_description}
-              />
-            ) : (
-              <meta
-                name={'description'}
-                key={'desc'}
-                content={'Discover the intersection of web design mastery and coding proficiency in my portfolio. Project showcase by GeorgeCht.'}
-              />
-            )}
-          </Head>
+          <PageHead title={`${project!.data.title} — Project Showcase`} />
           <TransitionPane ref={paneRef}>
             <Page>
               <VelocityMarquee className={'cursor-default'} direction={1}>
@@ -81,9 +80,7 @@ const Project = ({
                   />
                 </Marquee>
               </VelocityMarquee>
-              <RelatedProjects
-                projects={related! as Array<ProjectDocument<string>>}
-              />
+              <RelatedProjects projects={relatedProjects} />
               <Footer />
             </Page>
           </TransitionPane>

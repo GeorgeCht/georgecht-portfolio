@@ -2,7 +2,6 @@
 
 import TransitionPane from '@/components/transition/pane'
 import Page from '@/components/ui/page'
-import Head from 'next/head'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import TextReveal from '@/components/ui/text-reveal'
 
@@ -10,6 +9,7 @@ import * as Sentry from '@sentry/nextjs'
 import type { NextPageContext } from 'next'
 
 import React, { useRef } from 'react'
+import PageHead from '@/components/misc/page-head'
 
 export default function Error() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -17,16 +17,7 @@ export default function Error() {
 
   return (
     <React.Fragment>
-      <Head>
-        <title>Error | GeorgeCht</title>
-        <meta name={'description'} content={'Unexpected error'} />
-        <meta
-          name={'viewport'}
-          content={'width=device-width, initial-scale=1'}
-        />
-        <link rel={'icon'} href={'/favicon.ico'} />
-      </Head>
-
+      <PageHead title={'Error'} />
       <TransitionPane ref={paneRef}>
         <Page className={'justify-start'} ref={page}>
           <div
