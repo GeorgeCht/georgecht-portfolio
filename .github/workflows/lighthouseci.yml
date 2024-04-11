@@ -1,7 +1,7 @@
 name: Lighthouse CI
 on: [push]
 jobs:
-  static-export-serve:
+  lighthouse:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
