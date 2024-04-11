@@ -6,6 +6,9 @@ import Head from 'next/head'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import TextReveal from '@/components/ui/text-reveal'
 
+import * as Sentry from '@sentry/nextjs'
+import type { NextPageContext } from 'next'
+
 import React, { useRef } from 'react'
 
 export default function Error() {
@@ -19,14 +22,17 @@ export default function Error() {
         <meta name={'description'} content={'Unexpected error'} />
         <meta
           name={'viewport'}
-          content={'width=device-width, initial-scale=1'} />
+          content={'width=device-width, initial-scale=1'}
+        />
         <link rel={'icon'} href={'/favicon.ico'} />
       </Head>
 
       <TransitionPane ref={paneRef}>
         <Page className={'justify-start'} ref={page}>
           <div
-            className={'md:absolute flex flex-col left-0 -top-3 transition-opacity mt-14 md:mt-0'}
+            className={
+              'md:absolute flex flex-col left-0 -top-3 transition-opacity mt-14 md:mt-0'
+            }
           >
             <TextRevealByChar
               as={'h2'}
@@ -35,7 +41,7 @@ export default function Error() {
               enterY={'22.125%'}
               className={'-ml-0 md:ml-0 pl-6'}
               typeClass={'typography-display-intro'}
-              text={`↙`} 
+              text={`↙`}
             />
             <TextRevealByChar
               as={'h1'}
@@ -44,7 +50,7 @@ export default function Error() {
               enterY={'22.125%'}
               className={'ml-2 pl-6 -mt-[2.375vw]'}
               typeClass={'typography-display-intro'}
-              text={'Error'} 
+              text={'Error'}
             />
             <TextReveal
               as={'span'}
@@ -66,5 +72,9 @@ export default function Error() {
         </Page>
       </TransitionPane>
     </React.Fragment>
-  );
+  )
+}
+
+Error.getInitialProps = async (contextData: NextPageContext) => {
+  await Sentry.captureUnderscoreErrorException(contextData)
 }

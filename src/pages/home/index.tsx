@@ -3,10 +3,13 @@
 import TransitionPane from '@/components/transition/pane'
 import Page from '@/components/ui/page'
 import Head from 'next/head'
+import Magnetic from '@/components/ui/magnetic'
+import * as Sentry from '@sentry/nextjs'
 
 import React, {
   DetailedHTMLProps,
   HTMLAttributes,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -18,7 +21,6 @@ import TextRevealByChar from '@/components/ui/text-reveal-char'
 import Link from 'next/link'
 import { ImageFieldImage } from '@prismicio/client'
 import { PrismicNextImage } from '@prismicio/next'
-import Magnetic from '@/components/ui/magnetic'
 
 const TextEntry = ({
   leftSide = [],
@@ -136,6 +138,13 @@ const Home = () => {
   const paneRef = useRef<HTMLDivElement>(null)
   const page = useRef<HTMLElement>(null)
   const pageTitle = `GeorgeCht ©${getYear()}`
+
+  Sentry.metrics.increment('hits', 4)
+
+  useEffect(() => {
+    Sentry.metrics.increment('Homepage visits', 1)
+    Sentry.metrics.increment('hits', 4)
+  }, [])
 
   useScrollToTop()
 
