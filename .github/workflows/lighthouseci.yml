@@ -10,14 +10,5 @@ jobs:
         with:
           node-version: 18
       - run: npm install && npm install -g @lhci/cli@0.13.x
-      - run: npx serve@latest out
-  lighthouse-ci:
-    runs-on: ubuntu-latest
-    needs: [static-export-serve]
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - run: npm install && npm install -g @lhci/cli@0.13.x
+      - run: npx serve@latest out & npx wait-on http://localhost:3000
       - run: lhci autorun
