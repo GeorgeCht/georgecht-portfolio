@@ -40,15 +40,6 @@ const ProjectEntry = ({
       className={cn('flex flex-col w-full lg:w-1/3', className)}
       href={`/project/${project.uid}`}
     >
-      <TextReveal
-        as={'p'}
-        lineHeight={'0.85em'}
-        enterY={'10%'}
-        className={'mb-1.5'}
-        typeClass={'typography-caps-sm'}
-        text={`00${index}`}
-        delay={index * 0.075}
-      />
       <Parallax.Image.Prismic
         ratio={9 / 16}
         responsiveBreakpoint={1024}

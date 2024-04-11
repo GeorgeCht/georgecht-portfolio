@@ -25,6 +25,7 @@ const Project = ({
   related,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
+  const pageTitle = `${project!.data.title} — Project Showcase | GeorgeCht`
   useScrollToTop()
 
   return (
@@ -34,13 +35,20 @@ const Project = ({
       ) : (
         <React.Fragment>
           <Head>
-            <title>{project.data.meta_title}</title>
+            <title>{pageTitle}</title>
             {isFilled.keyText(project.data.meta_description) ? (
               <meta
                 name={'description'}
+                key={'desc'}
                 content={project.data.meta_description}
               />
-            ) : null}
+            ) : (
+              <meta
+                name={'description'}
+                key={'desc'}
+                content={'Discover the intersection of web design mastery and coding proficiency in my portfolio. Project showcase by GeorgeCht.'}
+              />
+            )}
           </Head>
           <TransitionPane ref={paneRef}>
             <Page>

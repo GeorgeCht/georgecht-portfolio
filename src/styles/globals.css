@@ -45,7 +45,7 @@ body {
     @apply uppercase;
   }
   .typography-display-intro {
-    @apply text-[240px] sm:text-[13.575vw];
+    @apply text-[19.625vw] sm:text-[13.575vw];
     @apply font-variation-[400];
     @apply tracking-[-0.04em];
     @apply leading-none;

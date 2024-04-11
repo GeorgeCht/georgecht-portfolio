@@ -21,12 +21,16 @@ import Link from 'next/link'
 const TextEntry = ({
   leftSide = [],
   rightSide = [],
+  leftSideUrl,
+  rightSideUrl,
   delay = 0,
   className,
   ...props
 }: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   leftSide?: Array<string>
   rightSide?: Array<string>
+  leftSideUrl?: string
+  rightSideUrl?: string
   delay?: number
 }) => {
   return (
@@ -38,36 +42,78 @@ const TextEntry = ({
       {...props}
     >
       <div>
-        {leftSide.map((textEntries, index) => {
-          return (
-            <TextReveal
-              key={index}
-              as={'span'}
-              lineHeight={'0.9em'}
-              enterY={'10%'}
-              className={'-mb-3.5 pb-0'}
-              typeClass={'typography-caps-sm mr-0.5'}
-              text={textEntries}
-              delay={delay * index * 0.075}
-            />
-          )
-        })}
+        {leftSideUrl ? (
+          <Link href={leftSideUrl!}>
+            {leftSide.map((textEntries, index) => {
+              return (
+                <TextReveal
+                  key={index}
+                  as={'span'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'-mb-3.5 pb-0'}
+                  typeClass={'typography-caps-sm mr-0.5'}
+                  text={textEntries}
+                  delay={delay * index * 0.075}
+                />
+              )
+            })}
+          </Link>
+        ) : (
+          <React.Fragment>
+            {leftSide.map((textEntries, index) => {
+              return (
+                <TextReveal
+                  key={index}
+                  as={'span'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'-mb-3.5 pb-0'}
+                  typeClass={'typography-caps-sm mr-0.5'}
+                  text={textEntries}
+                  delay={delay * index * 0.075}
+                />
+              )
+            })}
+          </React.Fragment>
+        )}
       </div>
       <div>
-        {rightSide.map((textEntries, index) => {
-          return (
-            <TextReveal
-              key={index}
-              as={'span'}
-              lineHeight={'0.9em'}
-              enterY={'10%'}
-              className={'-mb-3.5 pb-0'}
-              typeClass={'typography-caps-sm mr-0.5'}
-              text={textEntries}
-              delay={delay * index * 0.075}
-            />
-          )
-        })}
+        {rightSideUrl ? (
+          <Link href={rightSideUrl!}>
+            {rightSide.map((textEntries, index) => {
+              return (
+                <TextReveal
+                  key={index}
+                  as={'span'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'-mb-3.5 pb-0'}
+                  typeClass={'typography-caps-sm mr-0.5'}
+                  text={textEntries}
+                  delay={delay * index * 0.175}
+                />
+              )
+            })}
+          </Link>
+        ) : (
+          <React.Fragment>
+            {rightSide.map((textEntries, index) => {
+              return (
+                <TextReveal
+                  key={index}
+                  as={'span'}
+                  lineHeight={'0.9em'}
+                  enterY={'10%'}
+                  className={'-mb-3.5 pb-0'}
+                  typeClass={'typography-caps-sm mr-0.5'}
+                  text={textEntries}
+                  delay={delay * index * 0.175}
+                />
+              )
+            })}
+          </React.Fragment>
+        )}
       </div>
     </div>
   )
@@ -103,7 +149,7 @@ const Home = () => {
         <Page className={'justify-end'} ref={page}>
           <div
             className={cn(
-              'absolute left-0 -top-3 transition-opacity',
+              'md:absolute flex flex-col left-0 -top-3 transition-opacity mt-14 md:mt-0',
               mouseHover ? 'opacity-0' : 'opacity-100',
             )}
           >
@@ -159,7 +205,7 @@ const Home = () => {
           </div>
           <div
             className={
-              'flex flex-col md:flex-row gap-10 md:gap-0 justify-between relative w-full p-2'
+              'flex flex-col md:flex-row gap-10 md:gap-0 justify-between relative w-full p-2 pt-16 md:pt-0'
             }
           >
             <div
@@ -235,6 +281,7 @@ const Home = () => {
               />
               <TextEntry
                 delay={0.125}
+                leftSideUrl={'/project/anonyma'}
                 leftSide={[
                   'anonyma web app',
                   'self-initiated',
@@ -243,6 +290,7 @@ const Home = () => {
                   ' ',
                   '2024',
                 ]}
+                rightSideUrl={'/project/craftcom-neue'}
                 rightSide={[
                   'craftcom neue',
                   'self-initiated',
@@ -254,6 +302,7 @@ const Home = () => {
               />
               <TextEntry
                 delay={0.25}
+                leftSideUrl={'/project/product-evo'}
                 leftSide={[
                   'product evo',
                   'for productevo ltd.',
@@ -261,6 +310,7 @@ const Home = () => {
                   ' ',
                   '2022',
                 ]}
+                rightSideUrl={'/project/netactuate'}
                 rightSide={[
                   'netactuate',
                   'for netactuate, inc.',
@@ -272,6 +322,7 @@ const Home = () => {
               />
               <TextEntry
                 delay={0.375}
+                leftSideUrl={'/project/anassa'}
                 leftSide={[
                   'anassa general',
                   'for anassa general',
@@ -280,6 +331,7 @@ const Home = () => {
                   ' ',
                   '2023',
                 ]}
+                rightSideUrl={'/project/webshark'}
                 rightSide={[
                   'webshark',
                   'via 99designs',
