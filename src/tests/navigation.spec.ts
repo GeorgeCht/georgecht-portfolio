@@ -1,4 +1,3 @@
-import { includes } from '@/lib/utils'
 import { test, expect } from '@playwright/test'
 
 test('main navigation', async ({ page }) => {

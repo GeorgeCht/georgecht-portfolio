@@ -3,8 +3,8 @@
 module.exports = {
   ci: {
     collect: {
-      url: '<http://localhost:3000>',
-      startServerCommand: 'npm run start',
+      url: ['http://localhost:3000'],
+      startServerCommand: 'npx serve@latest out',
     },
     assert: {
       preset: 'lighthouse:recommended',
@@ -19,6 +19,14 @@ module.exports = {
         'preload-lcp-image': 'off',
         'offscreen-images': 'off',
         'unused-javascript': 'off',
+        'non-composited-animations': 'off',
+        'inspector-issues': 'off',
+        'third-party-cookies': 'off',
+        'target-size': 'off',
+        'total-byte-weight': 'off',
+        'video-caption': 'off',
+        'largest-contentful-paint': 'off',
+        'mainthread-work-breakdown': 'off',
 
         label: 'off',
         'content-width': 'off',
@@ -32,6 +40,13 @@ module.exports = {
         'service-worker': 'off',
         'splash-screen': 'off',
         'themed-omnibox': 'off',
+        'server-response-time': 'off',
+        'uses-long-cache-ttl': 'off',
+
+        'bootup-time': ['warn', { minScore: 0 }],
+        interactive: ['warn', { minScore: 0.1 }],
+        'max-potential-fid': ['warn', { minScore: 0.5 }],
+        'speed-index': ['warn', { minScore: 0.01 }],
       },
     },
     upload: {

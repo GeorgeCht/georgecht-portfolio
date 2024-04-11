@@ -33,6 +33,7 @@ const ProjectEntry = ({
   className?: string
 }) => {
   const headerRef = useRef<HTMLParagraphElement>(null)
+  // console.log(project.data)
   return (
     <Link
       scroll={false}

@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "playwright test",
-    "test:lighthouse": "npm run build && npx serve@latest out && lhci autorun",
+    "test:lighthouse": "npm run build && lhci autorun",
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
@@ -50,6 +50,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
     "postcss": "^8",
+    "serve": "^14.2.1",
     "slice-machine-ui": "^1.25.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
