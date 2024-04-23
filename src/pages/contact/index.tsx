@@ -19,6 +19,7 @@ import Link from 'next/link'
 import { motion as Motion } from 'framer-motion'
 import { useScrollToTop } from '@/lib/hooks'
 import React, { useRef } from 'react'
+import { toast } from 'sonner'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -43,6 +44,11 @@ export default function About() {
     },
   }
   useScrollToTop()
+
+  const openInNewTab = (url?: string | URL | undefined) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
 
   return (
     <React.Fragment>
@@ -78,7 +84,17 @@ export default function About() {
                 text={'Email'}
               />
               <div className={'w-fit hover:cursor-pointer'}>
-                <Magnetic className={'-mb-1.5'}>
+                <Magnetic
+                  className={'-mb-1.5'}
+                  onClick={() => {
+                    try {
+                      navigator.clipboard.writeText(data.email)
+                      toast.success('Email copied to clipboard.')
+                    } catch (error) {
+                      openInNewTab(`mailto:${data.email}`)
+                    }
+                  }}
+                >
                   <TextRevealFlip
                     as={'p'}
                     lineHeight={'0.95em'}
