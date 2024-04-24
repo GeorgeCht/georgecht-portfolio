@@ -28,6 +28,7 @@ import { useScrollToTop } from '@/lib/hooks'
 import { getYear, setBodyBg } from '@/lib/utils'
 import { InferGetStaticPropsType } from 'next'
 import PageHead from '@/components/misc/page-head'
+import Link from 'next/link'
 
 const Home = ({
   archiveData,
@@ -117,42 +118,64 @@ const Home = ({
           </VelocityMarquee>
           <IntroStripe id={'trigger-light'} />
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <Parallax.Image.Next
-              src={'/10.png'}
-              alt={'Project image'}
-              ratio={16 / 9}
-              responsiveRatio={1 / 1.1}
-              distance={125}
-              delay={0.575}
-              className={'mb-2'}
-            />
+            <Link href={'/project/anonyma'} scroll={false}>
+              <Parallax.Image.Next
+                src={
+                  'https://images.prismic.io/georgecht-portfolio/Zg2uizskWekewCZF_mockup_ipad_browse_01.webp?auto=format,compress'
+                }
+                alt={'Anonyma project image'}
+                ratio={16 / 9}
+                responsiveRatio={1 / 1.1}
+                distance={125}
+                delay={0.575}
+                className={'mb-2'}
+              />
+            </Link>
           </Section>
           <Section withPadding withGap className={'sm:pt-1.5'}>
-            <Parallax.Video
-              src={
-                'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/xx36shsmwnxo8doholak'
-              }
-              ratio={16 / 9}
-              responsiveRatio={1 / 1.1}
-              distance={125}
-              className={'mb-2'}
-            />
+            <Link href={'/project/webshark'} scroll={false}>
+              <Parallax.Video
+                src={
+                  'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/srldxjezegqclif4mx5r'
+                }
+                ratio={16 / 9}
+                responsiveRatio={1 / 1.1}
+                distance={90}
+                className={'mb-2'}
+              />
+            </Link>
           </Section>
           <Section
             withPadding
             withGap
             className={'flex-col md:flex-row sm:pt-1.5'}
           >
-            <div className={'md:w-1/2 w-full'} />
             <div className={'md:w-1/2 w-full'}>
-              <Parallax.Image.Next
-                src={'/12.png'}
-                alt={'Project image'}
-                ratio={1 / 1.1}
-                responsiveRatio={1 / 1.1}
-                distance={125}
-                className={'mb-2'}
-              />
+              <Link href={'/project/wmovies'} scroll={false}>
+                <Parallax.Video
+                  src={
+                    'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/sakbsgxmbmog2lnlssva'
+                  }
+                  ratio={1 / 1.1}
+                  responsiveRatio={1 / 1.1}
+                  distance={90}
+                  className={'mb-2'}
+                />
+              </Link>
+            </div>
+            <div className={'md:w-1/2 w-full'}>
+              <Link href={'/project/wmovies'} scroll={false}>
+                <Parallax.Video
+                  src={
+                    'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/tbm4xopozonufpxnhdpr.mp4'
+                  }
+                  ratio={1 / 1.1}
+                  responsiveRatio={1 / 1.1}
+                  distance={90}
+                  delay={0.375}
+                  className={'mb-2'}
+                />
+              </Link>
             </div>
           </Section>
           <Section
@@ -162,16 +185,33 @@ const Home = ({
             id={'trigger-dark'}
           >
             <div className={'md:w-1/2 w-full'}>
-              <Parallax.Image.Next
-                src={'/12.png'}
-                alt={'Project image'}
-                ratio={1 / 1.1}
-                responsiveRatio={1 / 1.1}
-                distance={125}
-                className={'mb-2'}
-              />
+              <Link href={'/project/craftcom-neue'} scroll={false}>
+                <Parallax.Image.Next
+                  src={
+                    'https://images.prismic.io/georgecht-portfolio/ZikcJfPdc1huKvkr_ccneue_cover_mockup.jpg?auto=format,compress'
+                  }
+                  alt={'Craftcom Neue project image'}
+                  ratio={1 / 1.1}
+                  responsiveRatio={1 / 1.1}
+                  distance={90}
+                  className={'mb-2'}
+                />
+              </Link>
             </div>
-            <div className={'md:w-1/2 w-full'} />
+            <div className={'md:w-1/2 w-full'}>
+              <Link href={'/project/craftcom-neue'} scroll={false}>
+                <Parallax.Video
+                  src={
+                    'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/mxfiwznscss6u27clvts'
+                  }
+                  ratio={1 / 1.1}
+                  responsiveRatio={1 / 1.1}
+                  distance={90}
+                  delay={0.375}
+                  className={'mb-2'}
+                />
+              </Link>
+            </div>
           </Section>
           <Section
             withPadding
@@ -180,14 +220,17 @@ const Home = ({
           >
             <div className={'w-1/6 hidden lg:flex'} />
             <div className={'md:w-1/2 w-full'}>
-              <Parallax.Image.Next
-                src={'/12.png'}
-                alt={'Project image'}
-                ratio={1 / 1.1}
-                responsiveRatio={1 / 1.1}
-                distance={125}
-                className={'mb-2'}
-              />
+              <Link href={'/project/netactuate'} scroll={false}>
+                <Parallax.Video
+                  src={
+                    'dqoxwlhrv/video/upload/f_auto:video,w_1920,q_auto:best/nvir9xu8sceg9hvrmxds'
+                  }
+                  ratio={1 / 1.1}
+                  responsiveRatio={1 / 1.1}
+                  distance={90}
+                  className={'mb-2'}
+                />
+              </Link>
             </div>
             <div className={'w-4/12 hidden lg:flex'} />
           </Section>
