@@ -1,16 +1,26 @@
-import { useRef } from 'react'
-import { ProjectDocument } from '../../../prismicio-types'
-
 import Pill from '@/components/new/button-pill'
 import Reveal from '@/components/new/reveal'
 import Section from '@/components/ui/section'
+
 import { isFilled } from '@prismicio/client'
+import { toast } from 'sonner'
+import { usePathname } from 'next/navigation'
+import { useRef } from 'react'
+import { ProjectDocument } from '../../../prismicio-types'
 
 const ProjectStripe = ({ project }: { project: ProjectDocument<string> }) => {
   const data = project.data
   const buttonRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
   const headerRef = useRef<HTMLParagraphElement>(null)
+
+  const pathname = usePathname()
+
+  const openInNewTab = (url?: string | URL | undefined) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
   return (
     <Section
       withPadding
@@ -85,10 +95,18 @@ const ProjectStripe = ({ project }: { project: ProjectDocument<string> }) => {
           delay={0.175}
         >
           <div className={'block relative pt-2'} ref={buttonRef}>
-            <Pill.ButtonFlip
+            <Pill.ActionFlip
               innerText={'Share'}
-              href={`/project/${project.uid}`}
-              scroll={false}
+              onClick={() => {
+                try {
+                  navigator.clipboard.writeText(
+                    `https://georgecht.com${pathname}`,
+                  )
+                  toast.success('Url copied to clipboard.')
+                } catch (error) {
+                  openInNewTab(`https://georgecht.com${pathname}`)
+                }
+              }}
             />
           </div>
         </Reveal>
