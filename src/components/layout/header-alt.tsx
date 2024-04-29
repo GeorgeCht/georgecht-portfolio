@@ -164,22 +164,6 @@ const HeaderAlt = ({
               />
             </Magnetic>
           </Link>
-          <Link scroll={false} href={'/cv'}>
-            <Magnetic className={'-mb-1.5 -mt-1'}>
-              <TextRevealFlip
-                as={'span'}
-                lineHeight={'1.2em'}
-                enterY={'10%'}
-                delay={0.4}
-                wrapperClass={'-mt-3'}
-                typeClass={'typography-md md:typography-sm mr-0 text-white'}
-                className={
-                  'after:mt-[0.25em] after:text-white md:group-hover:translate-y-[-120%] typography-md md:typography-sm'
-                }
-                text={'cv'}
-              />
-            </Magnetic>
-          </Link>
         </Motion.div>
       </div>
     </header>

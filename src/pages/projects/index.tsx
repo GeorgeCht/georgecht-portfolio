@@ -143,6 +143,10 @@ export async function getStaticProps() {
   try {
     data.projects = await client.getAllByType('project', {
       pageSize: 9,
+      orderings: {
+        field: 'my.project.year',
+        direction: 'desc',
+      },
     })
   } catch (err) {}
 

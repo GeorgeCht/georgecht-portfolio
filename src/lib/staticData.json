@@ -3,19 +3,19 @@
   "social": [
     {
       "title": "GitHub",
-      "url": "https://github.com"
+      "url": "https://github.com/georgecht"
     },
     {
       "title": "Dribbble",
-      "url": "https://dribbble.com"
+      "url": "https://dribbble.com/georgecht"
     },
     {
       "title": "LinkedIn",
-      "url": "https://linkedin.com"
+      "url": "https://www.linkedin.com/in/george-cht-058395306/"
     },
     {
       "title": "Instagram",
-      "url": "https://instagram.com"
+      "url": "https://instagram.com/george__cht"
     }
   ],
   "info": {
@@ -30,8 +30,8 @@
       "Typography design"
     ],
     "about": {
-      "title": "I specialize in front-end development. Being independent, I work with small to large companies, startups, design studios, and creative individuals globally.",
-      "paragraph": "Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles. Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles.",
+      "title": "I specialize in front-end development and web design. I have a strong design background and a CS major BSc degree, with over 8 years of experience.",
+      "paragraph": "I bring over 8 years of diverse experience, including 3 years in agencies and over 5 years of freelancing. I excel as both a web designer and front-end developer, proficient in HTML5, CSS3, JavaScript, TypeScript, Git/SEMVer versioning, with knowledge in CI/CD practices. My mastery extends to various web technologies, accessibility, analytics, testing, along with proficiency in React, Next.js, WordPress, and Kirby-style CMS platforms. I prioritize perfectionism in both coding and design, emphasizing polish, readability, accessibility, and performance. I have previously collaborated with folks from marketing and design in previous roles.",
       "image": {
         "src": "https://res.cloudinary.com/dqoxwlhrv/image/upload/f_auto,q_auto/v1/georgecht/vgitu8ubrctpnvw2gtb3",
         "alt": "George Cht profile",
@@ -41,8 +41,8 @@
     },
     "archive": {
       "text": [
-        "Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles.",
-        "Designed to save time while maintaining a strong visual presence on various social media channels, these templates feature a perfect blend of classic and contemporary styles."
+        "I specialize in front-end development and web design. I have a strong design and coding background and a CS major BSc degree, with over 8 years of experience.",
+        "Presented here is a selection of notable past projects — design and full websites or just GitHub repositories, representing either individual endeavors or collaborative efforts within a team."
       ]
     }
   }

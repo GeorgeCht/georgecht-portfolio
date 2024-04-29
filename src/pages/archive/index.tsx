@@ -16,6 +16,7 @@ import Section from '@/components/ui/section'
 import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import PageHead from '@/components/misc/page-head'
+import data from '@/lib/staticData.json'
 
 const Archive = ({
   archiveData,
@@ -52,18 +53,14 @@ const Archive = ({
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <Reveal opacity childrenRef={textRef} duration={1}>
                 <p className={'typography-base max-w-[620px]'} ref={textRef}>
-                  Designed to save time while maintaining a strong visual
-                  presence on various social media channels, these templates
-                  feature a perfect blend of classic and contemporary styles.
+                  {data.info.archive.text[0]}
                 </p>
               </Reveal>
             </div>
             <div className={'w-full sm:w-1/2 lg:w-1/3'}>
               <Reveal opacity childrenRef={textRef} duration={1} delay={0.275}>
                 <p className={'typography-base max-w-[620px]'} ref={textRef}>
-                  Designed to save time while maintaining a strong visual
-                  presence on various social media channels, these templates
-                  feature a perfect blend of classic and contemporary styles.
+                  {data.info.archive.text[1]}
                 </p>
               </Reveal>
             </div>
