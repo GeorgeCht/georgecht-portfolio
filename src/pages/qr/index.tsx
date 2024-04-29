@@ -21,7 +21,7 @@ import { useScrollToTop } from '@/lib/hooks'
 import React, { useRef } from 'react'
 import { toast } from 'sonner'
 
-export default function Contact() {
+export default function Qr() {
   const paneRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const animation = {
