@@ -16,6 +16,7 @@ import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import data from '@/lib/staticData.json'
 import PageHead from '@/components/misc/page-head'
+import mixpanel from 'mixpanel-browser'
 
 export default function About() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -42,6 +43,10 @@ export default function About() {
   }
 
   useScrollToTop()
+
+  mixpanel.track('PageView', {
+    Page: 'About',
+  })
 
   return (
     <React.Fragment>

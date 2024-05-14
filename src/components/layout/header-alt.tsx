@@ -1,12 +1,6 @@
 'use client'
 
-import Pill from '@/components/new/button-pill'
-import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useEffect,
-  useState,
-} from 'react'
+import React, { DetailedHTMLProps, HTMLAttributes, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { motion as Motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
@@ -20,13 +14,8 @@ const HeaderAlt = ({
   ...props
 }: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
   const pathname = usePathname()
-  const [isOpen, setIsOpen] = useState(false)
-  const [isOnHome, setIsOnHome] = useState(false)
 
-  useEffect(() => {
-    setIsOpen(false)
-    setIsOnHome(pathname === '/')
-  }, [pathname])
+  useEffect(() => {}, [pathname])
 
   const animationIntro = {
     initial: {

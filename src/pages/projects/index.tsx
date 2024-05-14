@@ -21,6 +21,7 @@ import { createClient } from '@prismicio/client'
 import { repositoryName } from '@/prismicio'
 import { ProjectDocument } from '../../../prismicio-types'
 import { InferGetStaticPropsType } from 'next'
+import mixpanel from 'mixpanel-browser'
 
 const ProjectEntry = ({
   index,
@@ -72,6 +73,10 @@ const Projects = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const paneRef = useRef<HTMLDivElement>(null)
   useScrollToTop()
+
+  mixpanel.track('PageView', {
+    Page: 'Projects',
+  })
 
   return (
     <React.Fragment>

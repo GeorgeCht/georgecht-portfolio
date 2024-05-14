@@ -17,6 +17,7 @@ import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import PageHead from '@/components/misc/page-head'
 import data from '@/lib/staticData.json'
+import mixpanel from 'mixpanel-browser'
 
 const Archive = ({
   archiveData,
@@ -24,6 +25,10 @@ const Archive = ({
   const paneRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLParagraphElement>(null)
   useScrollToTop()
+
+  mixpanel.track('PageView', {
+    Page: 'Archive',
+  })
 
   return (
     <React.Fragment>

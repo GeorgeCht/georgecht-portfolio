@@ -20,6 +20,7 @@ import { motion as Motion } from 'framer-motion'
 import { useScrollToTop } from '@/lib/hooks'
 import React, { useRef } from 'react'
 import { toast } from 'sonner'
+import mixpanel from 'mixpanel-browser'
 
 export default function Qr() {
   const paneRef = useRef<HTMLDivElement>(null)
@@ -44,6 +45,10 @@ export default function Qr() {
     },
   }
   useScrollToTop()
+
+  mixpanel.track('PageView', {
+    Page: 'QR',
+  })
 
   const openInNewTab = (url?: string | URL | undefined) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')

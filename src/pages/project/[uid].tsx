@@ -17,6 +17,7 @@ import ProjectStripe from '@/components/new/project-stripe'
 import RelatedProjects from '@/components/table/related-projects'
 import TableProject from '@/components/table/project'
 import PageHead from '@/components/misc/page-head'
+import mixpanel from 'mixpanel-browser'
 
 type Params = { uid: string }
 
@@ -41,6 +42,10 @@ const Project = ({
     }
     return relatedProjects.slice(0, 3)
   }
+
+  mixpanel.track('ProjectView', {
+    Project: project!.data.title,
+  })
 
   return (
     <React.Fragment>

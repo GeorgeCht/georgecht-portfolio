@@ -7,10 +7,15 @@ import TextReveal from '@/components/ui/text-reveal'
 
 import React, { useRef } from 'react'
 import PageHead from '@/components/misc/page-head'
+import mixpanel from 'mixpanel-browser'
 
 export default function Error() {
   const paneRef = useRef<HTMLDivElement>(null)
   const page = useRef<HTMLElement>(null)
+
+  mixpanel.track('PageView', {
+    Page: '404',
+  })
 
   return (
     <React.Fragment>

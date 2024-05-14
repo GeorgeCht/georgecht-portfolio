@@ -4,6 +4,7 @@ import { NextUIProvider } from '@nextui-org/react'
 import localFont from 'next/font/local'
 import type { AppProps } from 'next/app'
 import LenisProvider from '@/components/providers/lenis'
+import mixpanel from 'mixpanel-browser'
 import React from 'react'
 
 import { PrismicPreview } from '@prismicio/next'
@@ -20,6 +21,10 @@ const ccneue = localFont({
 })
 
 export default function App({ Component, pageProps, router }: AppProps) {
+  mixpanel.init('99f8e5ab9a009e3038883de98ddc8770', {
+    track_pageview: true,
+    persistence: 'localStorage',
+  })
   return (
     <LenisProvider>
       <NextUIProvider>
