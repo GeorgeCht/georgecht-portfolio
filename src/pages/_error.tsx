@@ -11,7 +11,7 @@ import type { NextPageContext } from 'next'
 import React, { useRef } from 'react'
 import PageHead from '@/components/misc/page-head'
 
-export default function Error() {
+export default function ErrorPage() {
   const paneRef = useRef<HTMLDivElement>(null)
   const page = useRef<HTMLElement>(null)
 
@@ -32,7 +32,7 @@ export default function Error() {
               enterY={'22.125%'}
               className={'-ml-0 md:ml-0 pl-6'}
               typeClass={'typography-display-intro'}
-              text={`↙`}
+              text={'↙'}
             />
             <TextRevealByChar
               as={'h1'}
@@ -66,6 +66,6 @@ export default function Error() {
   )
 }
 
-Error.getInitialProps = async (contextData: NextPageContext) => {
+ErrorPage.getInitialProps = async (contextData: NextPageContext) => {
   await Sentry.captureUnderscoreErrorException(contextData)
 }

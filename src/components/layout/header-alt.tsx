@@ -1,6 +1,10 @@
 'use client'
 
-import React, { DetailedHTMLProps, HTMLAttributes, useEffect } from 'react'
+import React, {
+  type DetailedHTMLProps,
+  type HTMLAttributes,
+  useEffect,
+} from 'react'
 import { cn } from '@/lib/utils'
 import { motion as Motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'

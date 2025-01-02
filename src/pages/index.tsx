@@ -11,13 +11,15 @@ import TextRevealByChar from '@/components/ui/text-reveal-char'
 import VelocityMarquee from '@/components/ui/velocity-marquee'
 import ArchiveList from '@/components/table/archive-list'
 import Parallax from '@/components/ui/parallax'
+import PageHead from '@/components/misc/page-head'
+import Link from 'next/link'
 
 import React, { useEffect, useRef } from 'react'
 import data from '@/lib/staticData.json'
 import {
   AnimatePresence,
   motion as Motion,
-  Variants,
+  type Variants,
   inView,
   useScroll,
   useTransform,
@@ -26,9 +28,7 @@ import { createClient } from '@prismicio/client'
 import { repositoryName } from '@/prismicio'
 import { useScrollToTop } from '@/lib/hooks'
 import { getYear, setBodyBg } from '@/lib/utils'
-import { InferGetStaticPropsType } from 'next'
-import PageHead from '@/components/misc/page-head'
-import Link from 'next/link'
+import type { InferGetStaticPropsType } from 'next'
 
 const Home = ({
   archiveData,

@@ -23,7 +23,7 @@ const PageHead = ({
       <meta
         name={'keywords'}
         content={
-          'George Cht, George Chatziiordanou, design, web development, developer, react, wordpress, portfolio, awwwards, greece, greek'
+          'George Cht, George Chatziiordanou, design, web development, front-end, front, end, developer, dev, web, react, wordpress, portfolio, awwwards, greece, greek'
         }
       />
       <meta name={'viewport'} content={'width=device-width, initial-scale=1'} />
@@ -45,11 +45,7 @@ const PageHead = ({
         content={'https://georgecht.com/share.jpg'}
       />
       <meta name={'twitter:card'} content={'summary_large_image'} />
-      {children ? (
-        <React.Fragment>{children}</React.Fragment>
-      ) : (
-        <React.Fragment />
-      )}
+      {children ? children : <React.Fragment />}
     </Head>
   )
 }

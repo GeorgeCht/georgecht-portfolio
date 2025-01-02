@@ -61,6 +61,7 @@ const Footer = ({
         />
         <div className={'w-fit'}>
           <button
+            type={'button'}
             className={'w-fit'}
             onClick={() => {
               try {
