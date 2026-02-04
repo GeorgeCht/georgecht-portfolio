@@ -81,7 +81,7 @@ const HeaderAlt = ({
               enterY={'10%'}
               className={'-mb-3.5 pb-0'}
               typeClass={'typography-caps-sm mr-0.5 text-white'}
-              text={'©2024'}
+              text={'©2026'}
               delay={0.075}
             />
           </Link>
